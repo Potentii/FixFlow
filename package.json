@@ -1,14 +1,16 @@
 {
-  "name": "fix-flow",
+  "name": "fixflow",
   "version": "0.0.1",
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "node standalone.js"
   },
   "author": "Guilherme Reginaldo Ruella",
   "license": "MIT",
   "dependencies": {
+    "chalk": "1.1.3",
+    "dotenv": "4.0.0",
     "knex": "0.12.9",
     "mysql2": "1.2.0",
     "w-srvr": "2.1.0"
