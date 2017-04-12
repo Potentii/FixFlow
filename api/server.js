@@ -19,10 +19,26 @@ function start({ routes, port }){
       // *Setting the server port:
       .port(port)
 
+      // *Configuring static content:
+      .static
+         .add('/static/js', '../static/js')
+         .add('/static/css', '../static/css')
+         .add('/static/res', '../static/res')
+         .add('/static/libs', '../static/node_modules')
+         .add('/static/js', '../static/js')
+         .index('../static/index.html')
+
       // *Configuring the API:
       .api
 
          // TODO define the API routes
+
+         .get('/api/v1/clients/:client/tickets', routes.tickets.getOneFromClient)
+         .get('/api/v1/clients/:client/tickets/:ticket', routes.tickets.getManyFromClient)
+
+         .get('/api/v1/operators/:operator/tickets', routes.tickets.getOneFromOperator)
+         .get('/api/v1/operators/:operator/tickets/:ticket', routes.tickets.getManyFromOperator)
+
          .most('*', (req, res, next) => res.status(501).end())
 
          .done()
