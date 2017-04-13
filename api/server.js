@@ -28,16 +28,34 @@ function start({ routes, port }){
          .add('/static/js', '../static/js')
          .index('../static/index.html')
 
+         .done()
+
       // *Configuring the API:
       .api
 
          // TODO define the API routes
 
+         .get('/api/v1/categories', routes.categories.getMany)
+         .get('/api/v1/categories/:id', routes.categories.getOne)
+         .post('/api/v1/categories', routes.categories.add)
+         .put('/api/v1/categories/:id', routes.categories.update)
+         .delete('/api/v1/categories/:id', routes.categories.remove)
+
+
+         .most('/api/v1/clients/*', (req, res, next) => next())
+            .advanced
+            .allowedHeaders('Client')
+            .done()
          .get('/api/v1/clients/:client/tickets', routes.tickets.getOneFromClient)
          .get('/api/v1/clients/:client/tickets/:ticket', routes.tickets.getManyFromClient)
 
-         .get('/api/v1/operators/:operator/tickets', routes.tickets.getOneFromOperator)
-         .get('/api/v1/operators/:operator/tickets/:ticket', routes.tickets.getManyFromOperator)
+
+         .most('/api/v1/operators/*', (req, res, next) => next())
+            .advanced
+            .allowedHeaders('Operator')
+            .done()
+         .get('/api/v1/operators/:operator/tickets', routes.tickets.getManyFromOperator)
+         //.get('/api/v1/operators/:operator/tickets/:ticket', routes.tickets.getManyFromOperator)
 
          .most('*', (req, res, next) => res.status(501).end())
 

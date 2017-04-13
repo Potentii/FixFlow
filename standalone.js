@@ -34,7 +34,7 @@ process.on('exit', code => {
 app.start()
    .then(info => {
       // *Logging the app information:
-      console.log(chalk.blue('Application started @ ' + info.address.href));
+      console.log(chalk.yellow('Application started @ ' + info.address.href));
    })
    .catch(err => {
       // *If some error happens:

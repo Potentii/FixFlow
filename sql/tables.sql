@@ -32,25 +32,67 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `fixflow_schema`.`department`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `fixflow_schema`.`department` ;
+
+CREATE TABLE IF NOT EXISTS `fixflow_schema`.`department` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(127) NULL,
+  `date` DATETIME NOT NULL DEFAULT now(),
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `fixflow_schema`.`category`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `fixflow_schema`.`category` ;
+
+CREATE TABLE IF NOT EXISTS `fixflow_schema`.`category` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(127) NULL,
+  `department_fk` BIGINT UNSIGNED NOT NULL,
+  `date` DATETIME NOT NULL DEFAULT now(),
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `department_fk_idx` (`department_fk` ASC),
+  CONSTRAINT `category_department_fk`
+    FOREIGN KEY (`department_fk`)
+    REFERENCES `fixflow_schema`.`department` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `fixflow_schema`.`ticket`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `fixflow_schema`.`ticket` ;
 
 CREATE TABLE IF NOT EXISTS `fixflow_schema`.`ticket` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` TEXT NOT NULL,
   `urgency` ENUM('low', 'medium', 'high') NOT NULL,
-  `category` VARCHAR(127) NOT NULL,
   `description` TEXT NOT NULL,
   `status` ENUM('pending', 'solving', 'closed') NOT NULL,
   `date_opened` DATETIME NOT NULL DEFAULT now(),
   `date_closed` DATETIME NULL,
+  `category_fk` BIGINT UNSIGNED NOT NULL,
   `client_fk` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `client_fk_idx` (`client_fk` ASC),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `client_fk_idx` (`client_fk` ASC),
+  INDEX `category_fk_idx` (`category_fk` ASC),
   CONSTRAINT `ticket_client_fk`
     FOREIGN KEY (`client_fk`)
     REFERENCES `fixflow_schema`.`client` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `ticket_category_fk`
+    FOREIGN KEY (`category_fk`)
+    REFERENCES `fixflow_schema`.`category` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -64,10 +106,16 @@ DROP TABLE IF EXISTS `fixflow_schema`.`operator` ;
 CREATE TABLE IF NOT EXISTS `fixflow_schema`.`operator` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(64) NOT NULL,
-  `department` VARCHAR(64) NOT NULL,
+  `department_fk` BIGINT UNSIGNED NOT NULL,
   `date` DATETIME NOT NULL DEFAULT now(),
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `department_fk_idx` (`department_fk` ASC),
+  CONSTRAINT `operator_department_fk`
+    FOREIGN KEY (`department_fk`)
+    REFERENCES `fixflow_schema`.`department` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
