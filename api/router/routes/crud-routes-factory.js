@@ -1,3 +1,7 @@
+// *Requiring errors module:
+const errors = require('../errors.js');
+
+
 
 /**
  * Retrieves one resource from the database given its 'id'
@@ -25,9 +29,7 @@ function getOne(table_name, knex, req, res, next, { id }){
             // *Sending a '404 NOT FOUND' response:
             res.status(404).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 
@@ -48,9 +50,7 @@ function getMany(table_name, knex, req, res, next){
          // *Sending a '200 OK' response with all the found items:
          res.status(200).json(items).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 
@@ -78,9 +78,7 @@ function add(table_name, knex, req, res, next, { insert_data }){
             // *Sending a '400 BAD REQUEST' response:
             res.status(400).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 
@@ -112,9 +110,7 @@ function update(table_name, knex, req, res, next, { id, update_data }){
             // *Sending a '404 NOT FOUND' response:
             res.status(404).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 
@@ -145,9 +141,7 @@ function remove(table_name, knex, req, res, next, { id }){
             // *Sending a '404 NOT FOUND' response:
             res.status(404).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 

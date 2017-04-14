@@ -1,3 +1,7 @@
+// *Requiring errors module:
+const errors = require('../errors.js');
+
+
 
 // *Exporting the routes:
 module.exports = knex => {
@@ -18,12 +22,12 @@ module.exports = knex => {
     */
    function check(req, res, next){
       // *Extracting the info from the request:
-      const username = req.get('Access-User');
-      const key = req.get('Access-Key');
+      const username = req.get('Access-User') || '';
+      const key = req.get('Access-Key') || '';
 
       // *Getting the query builder for this resource:
       return knex('user_access')
-         // *Selecting all the available fields:
+         // *Selecting a set of columns:
          .select('id')
          // *Adding the condition:
          .where({ key, username })
@@ -42,9 +46,7 @@ module.exports = knex => {
                res.status(401).end();
             }
          })
-         .catch(err => {
-            res.status(500).end();
-         });
+         .catch(err => errors.send(res, err));
    }
 
 

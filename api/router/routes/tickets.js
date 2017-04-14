@@ -1,3 +1,7 @@
+// *Requiring errors module:
+const errors = require('../errors.js');
+
+
 
 // *Exporting the routes:
 module.exports = knex => {
@@ -36,9 +40,7 @@ module.exports = knex => {
                // *Sending a '404 NOT FOUND' response:
                res.status(404).end();
          })
-         .catch(err => {
-            res.status(500).end();
-         });
+         .catch(err => errors.send(res, err));
    }
 
 
@@ -61,9 +63,7 @@ module.exports = knex => {
             // *Sending a '200 OK' response with all the items found:
             res.status(200).json(items).end();
          })
-         .catch(err => {
-            res.status(500).end();
-         });
+         .catch(err => errors.send(res, err));
    }
 
 
@@ -102,9 +102,7 @@ module.exports = knex => {
                // *Sending a '404 NOT FOUND' response:
                res.status(404).end();
          })
-         .catch(err => {
-            res.status(500).end();
-         });
+         .catch(err => errors.send(res, err));
    }
 
 

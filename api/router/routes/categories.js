@@ -1,3 +1,7 @@
+// *Requiring errors module:
+const errors = require('../errors.js');
+
+
 
 // *Exporting the routes:
 module.exports = knex => {
