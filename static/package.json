@@ -1,0 +1,11 @@
+{
+  "name": "fixflow-web-ui",
+  "version": "0.0.1",
+  "author": "Guilherme Reginaldo Ruella",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "2.2.4",
+    "vue-router": "2.3.0",
+    "web-event-emitter": "1.1.0"
+  }
+}

@@ -21,9 +21,11 @@ function start({ routes, port }){
 
       // *Configuring static content:
       .static
-         .add('/static/js', '../static/js')
-         .add('/static/css', '../static/css')
-         .add('/static/res', '../static/res')
+         .add('/static/components', '../static/components')
+         .add('/static/compositions', '../static/compositions')
+         .add('/static/controls', '../static/controls')
+         .add('/static/pages', '../static/pages')
+         .add('/static/identity', '../static/identity')
          .add('/static/libs', '../static/node_modules')
          .add('/static/js', '../static/js')
          .index('../static/index.html')
@@ -46,18 +48,18 @@ function start({ routes, port }){
             .advanced
             .allowedHeaders('Client')
             .done()
-         .get('/api/v1/clients/:client/tickets', routes.tickets.getOneFromClient)
-         .get('/api/v1/clients/:client/tickets/:ticket', routes.tickets.getManyFromClient)
+         .get('/api/v1/clients/tickets', routes.tickets.getManyFromClient)
+         .get('/api/v1/clients/tickets/:ticket', routes.tickets.getOneFromClient)
 
 
          .most('/api/v1/operators/*', (req, res, next) => next())
             .advanced
             .allowedHeaders('Operator')
             .done()
-         .get('/api/v1/operators/:operator/tickets', routes.tickets.getManyFromOperator)
+         .get('/api/v1/operators/tickets', routes.tickets.getManyFromOperator)
          //.get('/api/v1/operators/:operator/tickets/:ticket', routes.tickets.getManyFromOperator)
 
-         .most('*', (req, res, next) => res.status(501).end())
+         .most('/api/v1/*', (req, res, next) => res.status(501).end())
 
          .done()
 

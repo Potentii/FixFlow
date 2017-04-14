@@ -1,0 +1,30 @@
+/**
+ * The app colors
+ */
+:root{
+   --primary-color: #00BCD4;
+
+   --color: #F5F5F5;
+
+   --icon-color: #424242;
+   --icon-on-primary-color: #F5F5F5;
+   --icon-on-accent-color: #F5F5F5;
+
+   --text-color: #212121;
+   --text-on-primary-color: #FAFAFA;
+   --text-on-accent-color: #FAFAFA;
+}
+
+/**
+ * Setting the main foreground color
+ */
+body{
+   background-color: var(--color);
+}
+
+/**
+ * Setting the text color
+ */
+:root{
+   color: var(--text-color);
+}

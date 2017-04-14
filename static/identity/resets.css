@@ -1,0 +1,29 @@
+*{
+   position: relative;
+   margin: 0;
+   padding: 0;
+   background: none;
+   border: none;
+   width: auto;
+   height: auto;
+   box-sizing: border-box;
+}
+
+a{
+   text-decoration: none;
+}
+
+a:link{
+   color: #1976D2;
+}
+a:visited{
+   color: #1976D2;
+}
+
+*:focus{
+   outline: none;
+}
+
+ul{
+   list-style: none;
+}

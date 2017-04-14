@@ -1,6 +1,11 @@
 
 // *Exporting the routes:
 module.exports = knex => {
+   // *Defining the entity name:
+   const entity_name = 'ticket';
+
+   // *Requiring the default CRUD routes factory for this resource:
+   const crud_routes_factory = require('./crud-routes-factory.js')(entity_name, knex);
 
 
    /**
@@ -12,7 +17,7 @@ module.exports = knex => {
       const ticket = req.params.ticket;
 
       // *Getting the query builder for this resource:
-      return knex('ticket')
+      return knex(entity_name)
          // *Selecting all the available fields:
          .select('*')
          // *Adding the condition:
@@ -40,11 +45,12 @@ module.exports = knex => {
     * Retrieves many resources from the database
     */
    function getManyFromClient(req, res, next){
+      // TODO populate this in the auth route:
       // *Extracting the info from the request:
       const client = req.get('Client');
 
       // *Getting the query builder for this resource:
-      return knex('ticket')
+      return knex(entity_name)
          // *Selecting all the available fields:
          .select('*')
          // *Adding the condition:
@@ -55,6 +61,7 @@ module.exports = knex => {
             res.status(200).json(items).end();
          })
          .catch(err => {
+            console.log(err);
             res.status(500).end();
          });
    }
@@ -102,10 +109,29 @@ module.exports = knex => {
 
 
 
+   /**
+    * Retrieves many resources from the database
+    */
+   function addOnClient(req, res, next){
+      // *Extracting the info from the request:
+      const client = req.get('Client');
+      // *Getting the insert data from the request body:
+      const insert_data = req.body;
+      // *Adding the client reference:
+      insert_data.client_fk = client;
+
+      // *Executing the default CRUD route:
+      return crud_routes_factory.add(req, res, next, {insert_data});
+   }
+
+
+
    // *Returning the routes available:
    return {
       getOneFromClient,
-      getManyFromClient
+      getManyFromClient,
+      getManyFromOperator,
+      addOnClient
    };
 
 };

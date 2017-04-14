@@ -68,9 +68,15 @@ function add(table_name, knex, req, res, next, { insert_data }){
       // *Adding a insert statement to the query:
       .insert(insert_data)
       // *When the query resolves:
-      .then(inserted_id => {
-         // *Sending a '201 CREATED' response with the inserted instance id:
-         res.status(201).json({id: inserted_id}).end();
+      .then(inserted_ids => {
+         // *Checking if the database inserted some elements:
+         if(inserted_ids.length)
+            // *Sending a '201 CREATED' response with the inserted instance id:
+            res.status(201).json({id: inserted_ids[0]}).end();
+         else
+            // *If it didn't:
+            // *Sending a '400 BAD REQUEST' response:
+            res.status(400).end();
       })
       .catch(err => {
          res.status(500).end();

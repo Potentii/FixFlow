@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- * Meta * -->
+      <meta charset="utf-8">
+
+      <!-- * Fonts * -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+      <!-- * Identity * -->
+      <link rel="stylesheet" href="/static/identity/resets.css">
+      <link rel="stylesheet" href="/static/identity/colors.css">
+      <link rel="stylesheet" href="/static/identity/typography.css">
+
+      <!-- * Libraries * -->
+      <script src="/static/libs/vue/dist/vue.min.js"></script>
+      <script src="/static/libs/vue-router/dist/vue-router.min.js"></script>
+
+      <!-- * Controls * -->
+      <script src="/static/controls/ui.js"></script>
+      <script src="/static/controls/pages.js"></script>
+
+      <!-- * Elements * -->
+
+      <!-- * Components * -->
+      <link  href="/static/components/ticket-item/style.css" rel="stylesheet">
+      <script src="/static/components/ticket-item/script.js"></script>
+
+      <!-- * Compositions * -->
+      <link  href="/static/compositions/ticket-list/style.css" rel="stylesheet">
+      <script src="/static/compositions/ticket-list/script.js"></script>
+
+      <!-- * Pages * -->
+      <script src="/static/pages/index.js"></script>
+
+      <!-- * Initializations * -->
+      <script>
+         // *Setting up Vuejs:
+         Vue.config.silent = false;
+
+         // *Signaling that the UI can be initialized:
+         pages.done()
+            .then(() => {
+               // *Logging that the UI is ready:
+               console.info('UI ready');
+            })
+            // *Logging errors:
+            .catch(console.error);
+      </script>
+
+      <!-- * App title * -->
+      <title>FixFlow</title>
+   </head>
+   <body>
+      <div id="app">
+         <router-view></router-view>
+      </div>
+   </body>
+</html>
