@@ -8,12 +8,14 @@ module.exports = knex => {
    const crud_routes_factory = require('./crud-routes-factory.js')(entity_name, knex);
 
 
+
    /**
     * Retrieves one resource from the database
     */
    function getOneFromClient(req, res, next){
+      // *Extracting the info from the locals:
+      const client = res.locals.client;
       // *Extracting the info from the request:
-      const client = req.get('Client');
       const ticket = req.params.ticket;
 
       // *Getting the query builder for this resource:
@@ -45,9 +47,8 @@ module.exports = knex => {
     * Retrieves many resources from the database
     */
    function getManyFromClient(req, res, next){
-      // TODO populate this in the auth route:
-      // *Extracting the info from the request:
-      const client = req.get('Client');
+      // *Extracting the info from the locals:
+      const client = res.locals.client;
 
       // *Getting the query builder for this resource:
       return knex(entity_name)
@@ -61,7 +62,6 @@ module.exports = knex => {
             res.status(200).json(items).end();
          })
          .catch(err => {
-            console.log(err);
             res.status(500).end();
          });
    }
@@ -72,8 +72,8 @@ module.exports = knex => {
     * Retrieves many resources from the database
     */
    function getManyFromOperator(req, res, next){
-      // *Extracting the info from the request:
-      const operator = req.get('Operator');
+      // *Extracting the info from the locals:
+      const operator = res.locals.operator;
 
       // *Getting the query builder for this resource:
       return knex('operator')
@@ -113,8 +113,8 @@ module.exports = knex => {
     * Retrieves many resources from the database
     */
    function addOnClient(req, res, next){
-      // *Extracting the info from the request:
-      const client = req.get('Client');
+      // *Extracting the info from the locals:
+      const client = res.locals.client;
       // *Getting the insert data from the request body:
       const insert_data = req.body;
       // *Adding the client reference:
