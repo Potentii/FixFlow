@@ -1,0 +1,41 @@
+
+/**
+ * Root
+ */
+.custom-header{
+   padding: 0.6em 0.8em;
+   background-color: var(--primary-color);
+   box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.15);
+   z-index: 8;
+}
+
+/**
+ * Rows container
+ */
+.custom-header > div{
+   width: 100%;
+   height: 100%;
+   text-align: center;
+}
+
+/**
+ * Title span
+ */
+.custom-header > div > .custom-header-title{
+   display: block;
+   font-size: 1.8em;
+   font-family: 'Roboto Slab', serif;
+   font-variant: small-caps;
+   color: var(--icon-on-primary-color);
+}
+
+/**
+ * Subtitle span
+ */
+.custom-header > div > .custom-header-subtitle{
+   display: block;
+   margin-top: 0.2em;
+   opacity: 0.8;
+   font-size: 0.9em;
+   color: var(--icon-on-primary-color);
+}

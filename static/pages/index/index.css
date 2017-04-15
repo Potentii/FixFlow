@@ -4,12 +4,38 @@
  */
 .index-page{
    display: flex;
-   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   max-height: 100%;
+   height: 100%;
+   width: 100%;
 }
 
 /**
  * Tickets list
  */
-.index-page > .ticket-list{
+.index-page > .custom-header{
+   width: 100%;
+   flex-grow: 0;
+}
+
+/**
+ * Tickets list container
+ */
+.index-page > div:nth-child(2){
+   display: flex;
+   width: 100%;
+   overflow-y: auto;
+   flex-grow: 1;
+   padding: 1em 0;
+
+   flex-direction: column;
+   align-items: center;
+}
+
+/**
+ * Tickets list
+ */
+.index-page > div > .ticket-list{
    width: 85%;
 }

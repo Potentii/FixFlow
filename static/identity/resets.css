@@ -27,3 +27,8 @@ a:visited{
 ul{
    list-style: none;
 }
+
+html, body, #app{
+   overflow: hidden;
+   height: 100%;
+}
