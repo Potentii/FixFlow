@@ -1,3 +1,7 @@
+// *Requiring errors module:
+const errors = require('../errors.js');
+
+
 
 /**
  * Retrieves one resource from the database given its 'id'
@@ -25,9 +29,7 @@ function getOne(table_name, knex, req, res, next, { id }){
             // *Sending a '404 NOT FOUND' response:
             res.status(404).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 
@@ -48,9 +50,7 @@ function getMany(table_name, knex, req, res, next){
          // *Sending a '200 OK' response with all the found items:
          res.status(200).json(items).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 
@@ -62,7 +62,7 @@ function getMany(table_name, knex, req, res, next){
  * @param  {object} data.insert_data The resource content
  * @return {Promise}                 The promise chain
  */
-function add(table_name, knex, req, res, next, { insert_data }){
+function add(table_name, knex, req, res, next, { insert_data }, onSuccessResponse){
    // *Getting the query builder for this resource:
    return knex(table_name)
       // *Adding a insert statement to the query:
@@ -71,16 +71,35 @@ function add(table_name, knex, req, res, next, { insert_data }){
       .then(inserted_ids => {
          // *Checking if the database inserted some elements:
          if(inserted_ids.length)
-            // *Sending a '201 CREATED' response with the inserted instance id:
-            res.status(201).json({id: inserted_ids[0]}).end();
+            // *Checking if the success callback is set:
+            if(onSuccessResponse)
+               // *If it is:
+               // *Calling it:
+               onSuccessResponse({id: inserted_ids[0]});
+            else
+               // *If it's not:
+               // *Sending a '201 CREATED' response with the inserted instance id:
+               res.status(201).json({id: inserted_ids[0]}).end();
          else
             // *If it didn't:
             // *Sending a '400 BAD REQUEST' response:
             res.status(400).end();
       })
       .catch(err => {
-         res.status(500).end();
-      });
+         // *Checking the error code:
+         switch(err.code){
+         case 'ER_DATA_TOO_LONG':
+            // *If the inserted data was too long for the field:
+            // *Sending a '400 BAD REQUEST' response:
+            res.status(400).end();
+            break;
+         default:
+            // *If none of above:
+            // *Rejecting the promise:
+            return Promise.reject(err);
+         }
+      })
+      .catch(err => errors.send(res, err));
 }
 
 
@@ -112,9 +131,7 @@ function update(table_name, knex, req, res, next, { id, update_data }){
             // *Sending a '404 NOT FOUND' response:
             res.status(404).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 
@@ -145,9 +162,7 @@ function remove(table_name, knex, req, res, next, { id }){
             // *Sending a '404 NOT FOUND' response:
             res.status(404).end();
       })
-      .catch(err => {
-         res.status(500).end();
-      });
+      .catch(err => errors.send(res, err));
 }
 
 

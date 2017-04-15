@@ -8,6 +8,8 @@ module.exports = knex => {
       clients: {},
       operators: {},
       feedback: {},
-      auth: {}
+      credentials: require('./routes/credentials.js')(knex),
+      actors: require('./routes/actors.js')(knex),
+      accesses: require('./routes/accesses.js')(knex)
    };
 };

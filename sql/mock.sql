@@ -1,3 +1,6 @@
+-- -----------------------------------------------------
+-- Schema fixflow_schema
+-- -----------------------------------------------------
 USE `fixflow_schema`;
 
 
@@ -21,45 +24,83 @@ insert into `category` (`name`, `department_fk`) values ('magnis dis parturient'
 insert into `category` (`name`, `department_fk`) values ('dui', 3);
 
 
+-- 35 users
+insert into `user` (`username`, `password`) values ('test', '1234');
+insert into `user` (`username`, `password`) values ('bharrison1', 'radical');
+insert into `user` (`username`, `password`) values ('druiz2', 'didactic');
+insert into `user` (`username`, `password`) values ('nstewart3', 'migration');
+insert into `user` (`username`, `password`) values ('eharris4', 'hub');
+insert into `user` (`username`, `password`) values ('pspencer5', 'extranet');
+insert into `user` (`username`, `password`) values ('lhowell6', 'Customizable');
+insert into `user` (`username`, `password`) values ('mpatterson7', 'Front-line');
+insert into `user` (`username`, `password`) values ('amedina8', 'installation');
+insert into `user` (`username`, `password`) values ('earnold9', 'Balanced');
+insert into `user` (`username`, `password`) values ('phenrya', 'Phased');
+insert into `user` (`username`, `password`) values ('jwashingtonb', 'Multi-channelled');
+insert into `user` (`username`, `password`) values ('jlittlec', 'actuating');
+insert into `user` (`username`, `password`) values ('njohnsond', 'user-facing');
+insert into `user` (`username`, `password`) values ('whunte', 'Virtual');
+insert into `user` (`username`, `password`) values ('lmeyerf', 'User-centric');
+insert into `user` (`username`, `password`) values ('jbowmang', 'Organic');
+insert into `user` (`username`, `password`) values ('jjamesh', 'pricing structure');
+insert into `user` (`username`, `password`) values ('jandersoni', 'policy');
+insert into `user` (`username`, `password`) values ('lmurphyj', 'foreground');
+insert into `user` (`username`, `password`) values ('ahallk', 'bi-directional');
+insert into `user` (`username`, `password`) values ('wbanksl', 'orchestration');
+insert into `user` (`username`, `password`) values ('kbradleym', 'methodical');
+insert into `user` (`username`, `password`) values ('jhuntn', 'Devolved');
+insert into `user` (`username`, `password`) values ('alopezo', 'global');
+insert into `user` (`username`, `password`) values ('jshawp', 'capability');
+insert into `user` (`username`, `password`) values ('rbutlerq', 'Graphical User Interface');
+insert into `user` (`username`, `password`) values ('sgardnerr', 'global');
+insert into `user` (`username`, `password`) values ('mweavers', 'budgetary management');
+insert into `user` (`username`, `password`) values ('hthompsont', 'tertiary');
+insert into `user` (`username`, `password`) values ('vharrisu', 'Enhanced');
+insert into `user` (`username`, `password`) values ('jstanleyv', 'dynamic');
+insert into `user` (`username`, `password`) values ('anicholsw', '3rd generation');
+insert into `user` (`username`, `password`) values ('tkingx', 'access');
+insert into `user` (`username`, `password`) values ('dmoorey', 'Phased');
+
+
 -- 20 operators
-insert into `operator` (`name`, `department_fk`) values ('Harry Hernandez', 4);
-insert into `operator` (`name`, `department_fk`) values ('Brenda Warren', 1);
-insert into `operator` (`name`, `department_fk`) values ('Tammy Alexander', 3);
-insert into `operator` (`name`, `department_fk`) values ('Angela Ferguson', 3);
-insert into `operator` (`name`, `department_fk`) values ('Stephen Ross', 2);
-insert into `operator` (`name`, `department_fk`) values ('Jeremy Bell', 2);
-insert into `operator` (`name`, `department_fk`) values ('Gerald Cunningham', 2);
-insert into `operator` (`name`, `department_fk`) values ('Tammy Lopez', 4);
-insert into `operator` (`name`, `department_fk`) values ('Willie Ross', 4);
-insert into `operator` (`name`, `department_fk`) values ('Ralph Price', 2);
-insert into `operator` (`name`, `department_fk`) values ('Carolyn Scott', 2);
-insert into `operator` (`name`, `department_fk`) values ('Susan Hawkins', 3);
-insert into `operator` (`name`, `department_fk`) values ('Amanda Armstrong', 2);
-insert into `operator` (`name`, `department_fk`) values ('Rebecca Stewart', 2);
-insert into `operator` (`name`, `department_fk`) values ('Benjamin Baker', 4);
-insert into `operator` (`name`, `department_fk`) values ('Bobby Williams', 2);
-insert into `operator` (`name`, `department_fk`) values ('Louise Pierce', 2);
-insert into `operator` (`name`, `department_fk`) values ('Todd Edwards', 4);
-insert into `operator` (`name`, `department_fk`) values ('Mary Boyd', 1);
-insert into `operator` (`name`, `department_fk`) values ('Christopher Mccoy', 2);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Harry Hernandez', 4, 1);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Brenda Warren', 1, 2);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Tammy Alexander', 3, 3);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Angela Ferguson', 3, 4);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Stephen Ross', 2, 5);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Jeremy Bell', 2, 6);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Gerald Cunningham', 2, 7);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Tammy Lopez', 4, 8);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Willie Ross', 4, 9);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Ralph Price', 2, 10);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Carolyn Scott', 2, 11);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Susan Hawkins', 3, 12);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Amanda Armstrong', 2, 13);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Rebecca Stewart', 2, 14);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Benjamin Baker', 4, 15);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Bobby Williams', 2, 16);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Louise Pierce', 2, 17);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Todd Edwards', 4, 18);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Mary Boyd', 1, 19);
+insert into `operator` (`name`, `department_fk`, `user_fk`) values ('Christopher Mccoy', 2, 20);
 
 
 -- 15 clients
-insert into `client` (`name`, `phone`, `email`) values ('Bobby Rivera', '1-(211)796-0099', 'brivera0@addthis.com');
-insert into `client` (`name`, `phone`, `email`) values ('Scott Oliver', '86-(195)974-2606', 'soliver1@liveinternet.ru');
-insert into `client` (`name`, `phone`, `email`) values ('Amy Evans', '62-(803)414-0136', 'aevans2@tmall.com');
-insert into `client` (`name`, `phone`, `email`) values ('Bobby Cox', '63-(173)303-4973', 'bcox3@baidu.com');
-insert into `client` (`name`, `phone`, `email`) values ('Sharon Larson', '86-(815)337-6545', 'slarson4@gov.uk');
-insert into `client` (`name`, `phone`, `email`) values ('Joshua Lane', '353-(662)434-3818', 'jlane5@behance.net');
-insert into `client` (`name`, `phone`, `email`) values ('Martin Peters', '86-(933)106-0423', 'mpeters6@ucoz.ru');
-insert into `client` (`name`, `phone`, `email`) values ('Benjamin Ryan', '55-(405)433-0208', 'bryan7@nytimes.com');
-insert into `client` (`name`, `phone`, `email`) values ('Raymond Jones', '86-(959)980-2013', 'rjones8@globo.com');
-insert into `client` (`name`, `phone`, `email`) values ('Evelyn Walker', '86-(537)169-7868', 'ewalker9@upenn.edu');
-insert into `client` (`name`, `phone`, `email`) values ('Aaron Watson', '20-(299)912-5748', 'awatsona@oakley.com');
-insert into `client` (`name`, `phone`, `email`) values ('Mary Evans', '86-(868)424-8080', 'mevansb@g.co');
-insert into `client` (`name`, `phone`, `email`) values ('Ann Jenkins', '60-(937)691-9582', 'ajenkinsc@oaic.gov.au');
-insert into `client` (`name`, `phone`, `email`) values ('Howard Chavez', '86-(717)338-0078', 'hchavezd@cornell.edu');
-insert into `client` (`name`, `phone`, `email`) values ('Michelle Jordan', '86-(681)488-6920', 'mjordane@vk.com');
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Bobby Rivera', '1-(211)796-0099', 'brivera0@addthis.com', 21);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Scott Oliver', '86-(195)974-2606', 'soliver1@liveinternet.ru', 22);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Amy Evans', '62-(803)414-0136', 'aevans2@tmall.com', 23);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Bobby Cox', '63-(173)303-4973', 'bcox3@baidu.com', 24);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Sharon Larson', '86-(815)337-6545', 'slarson4@gov.uk', 25);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Joshua Lane', '353-(662)434-3818', 'jlane5@behance.net', 26);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Martin Peters', '86-(933)106-0423', 'mpeters6@ucoz.ru', 27);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Benjamin Ryan', '55-(405)433-0208', 'bryan7@nytimes.com', 28);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Raymond Jones', '86-(959)980-2013', 'rjones8@globo.com', 29);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Evelyn Walker', '86-(537)169-7868', 'ewalker9@upenn.edu', 30);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Aaron Watson', '20-(299)912-5748', 'awatsona@oakley.com', 31);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Mary Evans', '86-(868)424-8080', 'mevansb@g.co', 32);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Ann Jenkins', '60-(937)691-9582', 'ajenkinsc@oaic.gov.au', 33);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Howard Chavez', '86-(717)338-0078', 'hchavezd@cornell.edu', 34);
+insert into `client` (`name`, `phone`, `email`, `user_fk`) values ('Michelle Jordan', '86-(681)488-6920', 'mjordane@vk.com', 35);
 
 
 -- 20 tickets
@@ -83,4 +124,3 @@ insert into `ticket` (`title`, `urgency`, `description`, `status`, `category_fk`
 insert into `ticket` (`title`, `urgency`, `description`, `status`, `category_fk`, `client_fk`) values ('nec molestie', 'medium', 'Mauris sit amet eros.', 'solving', 6, 11);
 insert into `ticket` (`title`, `urgency`, `description`, `status`, `category_fk`, `client_fk`) values ('amet sapien dignissim', 'high', 'Morbi non lectus.', 'solving', 8, 5);
 insert into `ticket` (`title`, `urgency`, `description`, `status`, `category_fk`, `client_fk`) values ('consequat ut', 'medium', 'Duis bibendum. Morbi non quam nec dui luctus rutrum.', 'pending', 1, 15);
-

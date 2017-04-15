@@ -21,45 +21,53 @@ function start({ routes, port }){
 
       // *Configuring static content:
       .static
-         .add('/static/components', '../static/components')
          .add('/static/compositions', '../static/compositions')
+         .add('/static/components', '../static/components')
          .add('/static/controls', '../static/controls')
-         .add('/static/pages', '../static/pages')
          .add('/static/identity', '../static/identity')
          .add('/static/libs', '../static/node_modules')
-         .add('/static/js', '../static/js')
-         .index('../static/index.html')
+         .add('/static/pages', '../static/pages')
+         .index('../static/index.html', {root_only: false})
 
          .done()
 
       // *Configuring the API:
       .api
 
-         // TODO define the API routes
+         .get('/api/v1/credentials', routes.credentials.check)
 
+         /**
+          * Accesses routes
+          */
+         .get('/api/v1/accesses', routes.accesses.check)
+         .post('/api/v1/accesses', [routes.credentials.check, routes.accesses.add])
+
+
+         .get('/api/v1/actors', [routes.accesses.check, routes.actors.get])
+
+         /**
+          * Categories routes
+          */
          .get('/api/v1/categories', routes.categories.getMany)
          .get('/api/v1/categories/:id', routes.categories.getOne)
          .post('/api/v1/categories', routes.categories.add)
          .put('/api/v1/categories/:id', routes.categories.update)
          .delete('/api/v1/categories/:id', routes.categories.remove)
 
-
-         .most('/api/v1/clients/*', (req, res, next) => next())
-            .advanced
-            .allowedHeaders('Client')
-            .done()
+         /**
+          * Client-actor tickets
+          */
+         .most('/api/v1/clients/*', [routes.accesses.check, routes.actors.extractClient])
          .get('/api/v1/clients/tickets', routes.tickets.getManyFromClient)
          .get('/api/v1/clients/tickets/:ticket', routes.tickets.getOneFromClient)
+         .post('/api/v1/clients/tickets', routes.tickets.addOnClient)
 
-
-         .most('/api/v1/operators/*', (req, res, next) => next())
-            .advanced
-            .allowedHeaders('Operator')
-            .done()
+         /**
+          * Operator-actor tickets
+          */
+         .most('/api/v1/operators/*', [routes.accesses.check, routes.actors.extractOperator])
          .get('/api/v1/operators/tickets', routes.tickets.getManyFromOperator)
          //.get('/api/v1/operators/:operator/tickets/:ticket', routes.tickets.getManyFromOperator)
-
-         .most('/api/v1/*', (req, res, next) => res.status(501).end())
 
          .done()
 

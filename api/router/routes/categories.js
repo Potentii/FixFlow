@@ -1,9 +1,16 @@
+// *Requiring errors module:
+const errors = require('../errors.js');
+
+
 
 // *Exporting the routes:
 module.exports = knex => {
 
+   // *Defining the entity name:
+   const entity_name = 'category';
+
    // *Requiring the default CRUD routes factory for this resource:
-   const crud_routes_factory = require('./crud-routes-factory.js')('category', knex);
+   const crud_routes_factory = require('./crud-routes-factory.js')(entity_name, knex);
 
 
    /**

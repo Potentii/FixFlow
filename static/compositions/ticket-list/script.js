@@ -13,22 +13,28 @@ ui.add('ticket-list', {
    },
    methods: {
       getTicketRoute(){
-         return '/api/v1/clients/tickets';
-      },
-      getContextHeader(){
-         // TODO deprecate this method:
-         return {'Client': 5};
+         if(cache.getActor().type == ACTORS.CLIENT)
+            return '/api/v1/clients/tickets';
+         else
+            return '/api/v1/operators/tickets';
       },
       load(){
-         fetch(this.getTicketRoute(), {headers: this.getContextHeader()})
+         // *Getting the access info from the cache:
+         const access = cache.getAccess();
+
+         fetch(this.getTicketRoute(), {
+               headers: {
+                  [ACCESS_HEADERS.USER]: access.user,
+                  [ACCESS_HEADERS.KEY]: access.key
+               }
+            })
             .then(res => res.json())
             .then(items => {
-               console.log(items);
                this.items = items;
             })
             .catch(err => {
                console.error(err);
-            })
+            });
 
       }
    },
