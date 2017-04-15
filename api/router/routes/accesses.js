@@ -22,22 +22,24 @@ module.exports = knex => {
     */
    function check(req, res, next){
       // *Extracting the info from the request:
-      const username = req.get('Access-User') || '';
+      const user = req.get('Access-User') || '';
       const key = req.get('Access-Key') || '';
 
       // *Getting the query builder for this resource:
-      return knex('user_access')
-         // *Selecting a set of columns:
-         .select('id')
+      return knex('access')
+         // *Selecting all the columns:
+         .select()
          // *Adding the condition:
-         .where({ key, username })
+         .where({ key, user_fk: user })
          // *When the query resolves:
          .then(items => {
             // *Checking if any item has been found:
             if(items.length){
                // *If it has:
                // *Setting the user id on the response locals:
-               res.locals.user = items[0].id;
+               res.locals.user = items[0].user_fk;
+               // *Setting the request status to '200 OK', as this route might be used alone:
+               res.status(200);
                // *Sending the request to the next handler, as it passes the auth check:
                next();
             } else{
@@ -64,8 +66,11 @@ module.exports = knex => {
          user_fk: res.locals.user
       };
 
-      // *Executing the default CRUD route to create a new access:
-      return crud_routes_factory.add(req, res, next, { insert_data });
+      return crud_routes_factory.add(req, res, next, { insert_data }, (body) => {
+         // *If everything went fine:
+         // *Sending a '201 CREATED' response with the generated key and the user id:
+         res.status(201).json({ key: insert_data.key, user: insert_data.user_fk }).end();
+      });
    }
 
 

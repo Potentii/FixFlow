@@ -23,6 +23,7 @@ CREATE VIEW `department_tickets` AS
 -- -----------------------------------------------------
 -- View `fixflow_schema`.`user_access`
 -- -----------------------------------------------------
+/*
 DROP VIEW IF EXISTS `user_access`;
 
 CREATE VIEW `user_access` AS
@@ -33,4 +34,5 @@ CREATE VIEW `user_access` AS
     FROM `access`
     INNER JOIN `user`
       ON `access`.`user_fk` = `user`.`id`;
+      */
 

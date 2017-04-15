@@ -17,9 +17,17 @@
       <script src="/static/libs/vue/dist/vue.min.js"></script>
       <script src="/static/libs/vue-router/dist/vue-router.min.js"></script>
 
+      <!-- * Globals * -->
+      <script src="/static/controls/globals.js"></script>
+      <script>
+         // *Setting the environment mode:
+         const ENV = ENVS.DEV;
+      </script>
+
       <!-- * Controls * -->
       <script src="/static/controls/ui.js"></script>
       <script src="/static/controls/pages.js"></script>
+      <script src="/static/controls/cache.js"></script>
 
       <!-- * Elements * -->
 
@@ -33,21 +41,10 @@
 
       <!-- * Pages * -->
       <script src="/static/pages/index.js"></script>
+      <script src="/static/pages/login.js"></script>
 
-      <!-- * Initializations * -->
-      <script>
-         // *Setting up Vuejs:
-         Vue.config.silent = false;
-
-         // *Signaling that the UI can be initialized:
-         pages.done()
-            .then(() => {
-               // *Logging that the UI is ready:
-               console.info('UI ready');
-            })
-            // *Logging errors:
-            .catch(console.error);
-      </script>
+      <!-- * Lifecycle * -->
+      <script src="/static/controls/lifecycle.js"></script>
 
       <!-- * App title * -->
       <title>FixFlow</title>

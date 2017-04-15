@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `fixflow_schema`.`ticket` (
   `title` TEXT NOT NULL,
   `urgency` ENUM('LOW', 'MEDIUM', 'HIGH') NOT NULL,
   `description` TEXT NOT NULL,
-  `status` ENUM('PENDING', 'SOLVING', 'CLOSED') NOT NULL,
+  `status` ENUM('PENDING', 'SOLVING', 'CLOSED') NOT NULL DEFAULT 'PENDING',
   `date_opened` DATETIME NOT NULL DEFAULT NOW(),
   `date_closed` DATETIME NULL,
   `category_fk` BIGINT UNSIGNED NOT NULL,

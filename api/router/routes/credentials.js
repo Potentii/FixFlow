@@ -15,8 +15,8 @@ module.exports = knex => {
     */
    function check(req, res, next){
       // *Extracting the info from the request:
-      const username = req.get('Credential-User');
-      const password = req.get('Credential-Pass');
+      const username = req.get('Credential-User') || '';
+      const password = req.get('Credential-Pass') || '';
 
       // *Getting the query builder for this resource:
       return knex(entity_name)
@@ -31,6 +31,8 @@ module.exports = knex => {
                // *If it has:
                // *Setting the user id on the response locals:
                res.locals.user = items[0].id;
+               // *Setting the request status to '200 OK', as this route might be used alone:
+               res.status(200);
                // *Sending the request to the next handler, as it passes the credentials check:
                next();
             } else{

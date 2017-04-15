@@ -27,17 +27,23 @@ function start({ routes, port }){
          .add('/static/identity', '../static/identity')
          .add('/static/libs', '../static/node_modules')
          .add('/static/pages', '../static/pages')
-         .index('../static/index.html')
+         .index('../static/index.html', {root_only: false})
 
          .done()
 
       // *Configuring the API:
       .api
 
+         .get('/api/v1/credentials', routes.credentials.check)
+
          /**
           * Accesses routes
           */
+         .get('/api/v1/accesses', routes.accesses.check)
          .post('/api/v1/accesses', [routes.credentials.check, routes.accesses.add])
+
+
+         .get('/api/v1/actors', [routes.accesses.check, routes.actors.get])
 
          /**
           * Categories routes
@@ -62,9 +68,6 @@ function start({ routes, port }){
          .most('/api/v1/operators/*', [routes.accesses.check, routes.actors.extractOperator])
          .get('/api/v1/operators/tickets', routes.tickets.getManyFromOperator)
          //.get('/api/v1/operators/:operator/tickets/:ticket', routes.tickets.getManyFromOperator)
-
-
-         .most('/api/v1/*', (req, res, next) => res.status(501).end())
 
          .done()
 

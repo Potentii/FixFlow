@@ -3,7 +3,7 @@ pages.add('index', '/', {
       'ticket-list': ui.get('ticket-list')
    },
    methods: {
-      
+
    },
    template:
       `

@@ -25,7 +25,7 @@ insert into `category` (`name`, `department_fk`) values ('dui', 3);
 
 
 -- 35 users
-insert into `user` (`username`, `password`) values ('aadams0', 'user-facing');
+insert into `user` (`username`, `password`) values ('test', '1234');
 insert into `user` (`username`, `password`) values ('bharrison1', 'radical');
 insert into `user` (`username`, `password`) values ('druiz2', 'didactic');
 insert into `user` (`username`, `password`) values ('nstewart3', 'migration');
