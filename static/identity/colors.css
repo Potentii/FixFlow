@@ -21,7 +21,7 @@
    --text-color-faded: #757575;
    --text-color-faded-max: #BDBDBD;
    --text-on-primary-color: #FAFAFA;
-   --text-on-accent-color: #FAFAFA;
+   --text-on-accent-color: var(--text-color-strong);
 }
 
 /**

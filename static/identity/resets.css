@@ -28,6 +28,10 @@ ul{
    list-style: none;
 }
 
+a:hover, button:hover{
+   cursor: pointer;
+}
+
 html, body, #app{
    overflow: hidden;
    height: 100%;
