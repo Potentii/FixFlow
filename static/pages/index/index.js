@@ -7,7 +7,7 @@ pages.add('index', '/', {
    },
    template:
       `
-      <div>
+      <div class="index-page">
          <ticket-list></ticket-list>
       </div>
       `

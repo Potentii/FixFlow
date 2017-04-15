@@ -22,10 +22,7 @@ pages.add('login', '/login', {
          // *Trying to create a new access:
          fetch('/api/v1/accesses', {
                method: 'POST',
-               headers: {
-                  [CREDENTIAL_HEADERS.USER]: username,
-                  [CREDENTIAL_HEADERS.PASS]: password
-               }
+               headers: new HeadersBuilder().addCredentials(username, password).get()
             })
             .then(res => {
                // *Checking the response status:

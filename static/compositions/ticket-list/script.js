@@ -1,43 +1,45 @@
 ui.add('ticket-list', {
+
    components: {
       'ticket-item': ui.get('ticket-item')
    },
-   props: {},
+
    data(){
       return {
          items: []
       };
    },
+
    mounted(){
       this.load();
    },
+
    methods: {
+
       getTicketRoute(){
+         // *Checking if the user is a client:
          if(cache.getActor().type == ACTORS.CLIENT)
+            // *If they're:
             return '/api/v1/clients/tickets';
          else
+            // *If they aren't:
             return '/api/v1/operators/tickets';
       },
-      load(){
-         // *Getting the access info from the cache:
-         const access = cache.getAccess();
 
+      load(){
          fetch(this.getTicketRoute(), {
-               headers: {
-                  [ACCESS_HEADERS.USER]: access.user,
-                  [ACCESS_HEADERS.KEY]: access.key
-               }
+               headers: new HeadersBuilder().addAccess().get()
             })
             .then(res => res.json())
             .then(items => {
                this.items = items;
             })
-            .catch(err => {
-               console.error(err);
-            });
-
+            // *Logging errors:
+            .catch(err => (ENV!=ENVS.PROD) && console.error(err));
       }
+
    },
+
    template:
       `
          <ul class="ticket-list">

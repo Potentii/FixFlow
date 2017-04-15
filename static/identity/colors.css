@@ -3,14 +3,23 @@
  */
 :root{
    --primary-color: #00BCD4;
+   --accent-color: #00BCD4;
 
+   --color-strong-max: #FFFFFF;
+   --color-strong: #FAFAFA;
    --color: #F5F5F5;
+   --color-faded: #E0E0E0;
 
+   --icon-color-strong: #424242;
    --icon-color: #424242;
+   --icon-color-faded: #424242;
    --icon-on-primary-color: #F5F5F5;
    --icon-on-accent-color: #F5F5F5;
 
-   --text-color: #212121;
+   --text-color-strong: #212121;
+   --text-color: #424242;
+   --text-color-faded: #757575;
+   --text-color-faded-max: #BDBDBD;
    --text-on-primary-color: #FAFAFA;
    --text-on-accent-color: #FAFAFA;
 }
@@ -19,7 +28,7 @@
  * Setting the main foreground color
  */
 body{
-   background-color: var(--color);
+   background-color: var(--color-faded);
 }
 
 /**

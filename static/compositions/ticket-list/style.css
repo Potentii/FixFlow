@@ -1,0 +1,6 @@
+/**
+ * Each list item
+ */
+.ticket-list > li{
+   margin-bottom: 0.5em;
+}

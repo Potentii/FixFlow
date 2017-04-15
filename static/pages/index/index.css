@@ -1,0 +1,15 @@
+
+/**
+ * Root
+ */
+.index-page{
+   display: flex;
+   justify-content: center;
+}
+
+/**
+ * Tickets list
+ */
+.index-page > .ticket-list{
+   width: 85%;
+}
