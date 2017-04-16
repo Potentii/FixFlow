@@ -58,9 +58,17 @@ pages.add('login', '/login', {
       `
       <div>
          <form @submit.prevent="attemptToLogin">
-            <input class="login-form-username-input" type="text" v-model="username">
-            <input class="login-form-password-input" type="password" v-model="password">
 
+            <label class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+               <input type="text" class="mdc-textfield__input" v-model="username">
+               <span class="mdc-textfield__label">Username</span>
+            </label>
+
+            <label class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+               <input type="password" class="mdc-textfield__input" v-model="password">
+               <span class="mdc-textfield__label">Password</span>
+            </label>
+            
             <button class="login-form-submit-button" type="submit">Login</button>
 
             <span v-if="cred_check_has_failed">Sorry, invalid username and/or password</span>
