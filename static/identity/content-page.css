@@ -1,0 +1,50 @@
+/**
+ * Root
+ */
+.content-page{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   max-height: 100%;
+   height: 100%;
+   width: 100%;
+}
+
+
+/**
+ * Header
+ */
+.content-page > .custom-header{
+   width: 100%;
+   flex-grow: 0;
+}
+
+/**
+ * Wrapper
+ */
+.content-page > .content-wrapper{
+   display: flex;
+   width: 100%;
+   overflow-y: auto;
+   flex-grow: 1;
+   padding: 1em 0;
+
+   flex-direction: column;
+   align-items: center;
+}
+
+/**
+ * Content
+ */
+.content-page > .content-wrapper > .content{
+   width: 85%;
+}
+
+
+/**
+ * Footer
+ */
+.content-page > .custom-footer{
+   width: 100%;
+   flex-grow: 0;
+}

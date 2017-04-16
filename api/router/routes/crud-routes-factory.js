@@ -90,6 +90,20 @@ function add(table_name, knex, req, res, next, { insert_data }, onSuccessRespons
          switch(err.code){
          case 'ER_DATA_TOO_LONG':
             // *If the inserted data was too long for the field:
+         case 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD':
+            // *If the inserted data has the wrong type:
+         case 'ER_NO_REFERENCED_ROW_2':
+            // *If the inserted data references an inexistent entity:
+         case 'ER_WARN_DATA_OUT_OF_RANGE':
+            // *If the inserted data is out of range:
+         case 'ER_BAD_NULL_ERROR':
+            // *If the inserted data is null:
+         case 'ER_NO_DEFAULT_FOR_FIELD':
+            // *If the inserted data is undefined, but it should contain a value:
+         case 'ER_PARSE_ERROR':
+            // *If the inserted data couldn't be parsed:
+         case 'WARN_DATA_TRUNCATED':
+            // *If the inserted data couldn't be converted correctly:
             // *Sending a '400 BAD REQUEST' response:
             res.status(400).end();
             break;
@@ -130,6 +144,34 @@ function update(table_name, knex, req, res, next, { id, update_data }){
             // *If it didn't:
             // *Sending a '404 NOT FOUND' response:
             res.status(404).end();
+      })
+      .catch(err => {
+         // *Checking the error code:
+         switch(err.code){
+         case 'ER_DATA_TOO_LONG':
+            // *If the inserted data was too long for the field:
+         case 'ER_TRUNCATED_WRONG_VALUE_FOR_FIELD':
+            // *If the inserted data has the wrong type:
+         case 'ER_NO_REFERENCED_ROW_2':
+            // *If the inserted data references an inexistent entity:
+         case 'ER_WARN_DATA_OUT_OF_RANGE':
+            // *If the inserted data is out of range:
+         case 'ER_BAD_NULL_ERROR':
+            // *If the inserted data is null:
+         case 'ER_NO_DEFAULT_FOR_FIELD':
+            // *If the inserted data is undefined, but it should contain a value:
+         case 'ER_PARSE_ERROR':
+            // *If the inserted data couldn't be parsed:
+         case 'WARN_DATA_TRUNCATED':
+            // *If the inserted data couldn't be converted correctly:
+            // *Sending a '400 BAD REQUEST' response:
+            res.status(400).end();
+            break;
+         default:
+            // *If none of above:
+            // *Rejecting the promise:
+            return Promise.reject(err);
+         }
       })
       .catch(err => errors.send(res, err));
 }

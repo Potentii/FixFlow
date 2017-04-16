@@ -64,3 +64,30 @@
    margin-bottom: 1em;
    width: 80%
 }
+
+/**
+ * Error messages span
+ */
+.login-page .login-page-error-msg{
+   opacity: 0.8;
+   font-size: 0.9em;
+   margin-top: 0.5em;
+   color: #FF1744;
+   font-style: italic;
+
+   animation-name: fade-from-top;
+   animation-duration: 0.7s;
+}
+/**
+ * Error message animation
+ */
+@keyframes fade-from-top {
+   0% {
+      transform: translateY(-1em);
+      opacity: 0;
+   },
+   100% {
+      transform: translateY(0);
+      opacity: 1;
+   }
+}

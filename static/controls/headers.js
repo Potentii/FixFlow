@@ -37,6 +37,16 @@ class HeadersBuilder{
       return this;
    }
 
+   addJSONBody(){
+      // *Adding the body type header:
+      return this.add('Content-Type', 'application/json');
+   }
+
+   addAcceptJSON(){
+      // *Adding the Accept header:
+      return this.add('Accept', 'application/json');
+   }
+
    get(){
       // *Initializing the headers object:
       let headers = {};

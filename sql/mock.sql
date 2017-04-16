@@ -25,7 +25,7 @@ insert into `category` (`name`, `department_fk`) values ('dui', 3);
 
 
 -- 35 users
-insert into `user` (`username`, `password`) values ('test', '1234');
+insert into `user` (`username`, `password`) values ('test1', '1234');
 insert into `user` (`username`, `password`) values ('bharrison1', 'radical');
 insert into `user` (`username`, `password`) values ('druiz2', 'didactic');
 insert into `user` (`username`, `password`) values ('nstewart3', 'migration');
@@ -49,7 +49,7 @@ insert into `user` (`username`, `password`) values ('ahallk', 'bi-directional');
 insert into `user` (`username`, `password`) values ('wbanksl', 'orchestration');
 insert into `user` (`username`, `password`) values ('kbradleym', 'methodical');
 insert into `user` (`username`, `password`) values ('jhuntn', 'Devolved');
-insert into `user` (`username`, `password`) values ('alopezo', 'global');
+insert into `user` (`username`, `password`) values ('test2', '1234');
 insert into `user` (`username`, `password`) values ('jshawp', 'capability');
 insert into `user` (`username`, `password`) values ('rbutlerq', 'Graphical User Interface');
 insert into `user` (`username`, `password`) values ('sgardnerr', 'global');

@@ -1,6 +1,15 @@
 // *Setting up Vuejs configs:
 Vue.config.silent = ENV==ENVS.PROD ? true : false;
 
+document.addEventListener('DOMContentLoaded', e => {
+   setTimeout(() => {
+      // TODO put the MDC init on a 'on push' listener:
+      // *Initializing Material-Design-Components with supressed warnings:
+      mdc.autoInit(document, warn => {});
+   }, 100);
+})
+
+
 // *Signaling that the UI can be initialized:
 pages.done()
    .then(() => {
@@ -9,6 +18,7 @@ pages.done()
 
       // *Implementing the auth middleware:
       const auth = (to, from, next) => {
+         // TODO put the MDC init on a 'on push' listener:
          // *Initializing Material-Design-Components with supressed warnings:
          mdc.autoInit(document, warn => {});
 
@@ -31,6 +41,11 @@ pages.done()
             })
             .then(() => {
                // *If the authentication went ok:
+               setTimeout(() => {
+                  // TODO put the MDC init on a 'on push' listener:
+                  // *Initializing Material-Design-Components with supressed warnings:
+                  mdc.autoInit(document, warn => {});
+               }, 200);
                // *Sending the user to the desired page:
                next();
             })
@@ -38,6 +53,11 @@ pages.done()
                // *If some error happens or the authentication fails:
                // *Logging it out:
                (ENV!=ENVS.PROD) && console.error(err);
+               setTimeout(() => {
+                  // TODO put the MDC init on a 'on push' listener:
+                  // *Initializing Material-Design-Components with supressed warnings:
+                  mdc.autoInit(document, warn => {});
+               }, 200);
                // *Sending the user to the login page:
                pages.router.push('/login');
             });
