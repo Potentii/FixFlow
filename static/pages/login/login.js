@@ -56,20 +56,26 @@ pages.add('login', '/login', {
 
    template:
       `
-      <div>
+      <div class="login-page">
          <form @submit.prevent="attemptToLogin">
 
+            <h1>
+               Fix Flow
+            </h1>
+
             <label class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-               <input type="text" class="mdc-textfield__input" v-model="username">
+               <input type="text" class="mdc-textfield__input" v-model="username" required>
                <span class="mdc-textfield__label">Username</span>
             </label>
 
             <label class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-               <input type="password" class="mdc-textfield__input" v-model="password">
+               <input type="password" class="mdc-textfield__input" v-model="password" required>
                <span class="mdc-textfield__label">Password</span>
             </label>
-            
-            <button class="login-form-submit-button" type="submit">Login</button>
+
+            <button type="submit" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+               Login
+            </button>
 
             <span v-if="cred_check_has_failed">Sorry, invalid username and/or password</span>
             <span v-if="server_error">Sorry, the server isn't available right now</span>

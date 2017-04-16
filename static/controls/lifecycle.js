@@ -1,5 +1,5 @@
 // *Setting up Vuejs configs:
-Vue.config.silent = false;
+Vue.config.silent = ENV==ENVS.PROD ? true : false;
 
 // *Signaling that the UI can be initialized:
 pages.done()
@@ -9,8 +9,8 @@ pages.done()
 
       // *Implementing the auth middleware:
       const auth = (to, from, next) => {
-         // *Initializing Material-Design-Components:
-         mdc.autoInit();
+         // *Initializing Material-Design-Components with supressed warnings:
+         mdc.autoInit(document, warn => {});
 
          // *Discarding the access check on the '/login' route:
          if(to.fullPath==='/login') return next();

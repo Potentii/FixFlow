@@ -1,0 +1,66 @@
+/**
+ * Root
+ */
+.login-page{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+}
+
+/**
+ * Form
+ */
+.login-page > form{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 40%;
+   padding: 1em;
+   background-color: var(--color-strong);
+   border-radius: 2px;
+   box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05);
+}
+/**
+ * Form on small screens
+ */
+@media (max-width: 900px){
+   .login-page > form{
+      width: 70%;
+   }
+}
+/**
+ * Form on mobile
+ */
+@media (max-width: 600px){
+   .login-page > form{
+      width: 100%;
+      border-radius: 0;
+      height: 100%;
+   }
+}
+
+/**
+ * App title
+ */
+.login-page > form > h1{
+   align-self: flex-start;
+   font-size: 2em;
+}
+
+/**
+ * Form inputs
+ */
+.login-page > form > label{
+   width: 100%
+}
+
+/**
+ * Login button
+ */
+.login-page > form > button{
+   margin-top: 3em;
+   margin-bottom: 1em;
+   width: 80%
+}
