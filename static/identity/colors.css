@@ -3,7 +3,9 @@
  */
 :root{
    --primary-color: #0091EA;
+   --mdc-theme-primary: var(--primary-color) !important;
    --accent-color: #1DE9B6;
+   --mdc-theme-accent: var(--accent-color) !important;
 
    --color-strong-max: #FFFFFF;
    --color-strong: #FAFAFA;
@@ -21,7 +23,8 @@
    --text-color-faded: #757575;
    --text-color-faded-max: #BDBDBD;
    --text-on-primary-color: #FAFAFA;
-   --text-on-accent-color: var(--text-color-strong);
+   --text-on-accent-color: #F5F5F5;
+   --mdc-theme-text-primary-on-accent: var(--text-on-accent-color)!important;
 }
 
 /**
