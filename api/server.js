@@ -34,15 +34,27 @@ function start({ routes, port }){
       // *Configuring the API:
       .api
 
+         // *Setting up the body parser:
+         .most('/api/v1/*')
+            .advanced
+               .parseJSON()
+               .done()
+
+
+         /**
+          * Credentials routes (i.e. login)
+          */
          .get('/api/v1/credentials', routes.credentials.check)
 
          /**
-          * Accesses routes
+          * Accesses routes (i.e. authentication)
           */
          .get('/api/v1/accesses', routes.accesses.check)
          .post('/api/v1/accesses', [routes.credentials.check, routes.accesses.add])
 
-
+         /**
+          * Actors routes (e.g. clients/operators id extraction)
+          */
          .get('/api/v1/actors', [routes.accesses.check, routes.actors.get])
 
          /**

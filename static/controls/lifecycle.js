@@ -9,6 +9,9 @@ pages.done()
 
       // *Implementing the auth middleware:
       const auth = (to, from, next) => {
+         // *Initializing Material-Design-Components:
+         mdc.autoInit();
+
          // *Discarding the access check on the '/login' route:
          if(to.fullPath==='/login') return next();
 
@@ -59,15 +62,9 @@ pages.done()
  * @return {Promise<Actor>} Resolves into an { id, type } actor object, or rejects if the actor couldn't be found (or if some error happens)
  */
 function fetchActorInfo(){
-   // *Getting the access info from the cache:
-   const access = cache.getAccess();
-
    // *Trying to fetch the actor info:
    return fetch('/api/v1/actors', {
-         headers: {
-            [ACCESS_HEADERS.USER]: access.user,
-            [ACCESS_HEADERS.KEY]: access.key
-         }
+         headers: new HeadersBuilder().addAccess().get()
       })
       .then(res => {
          // *Checking the response status:
@@ -98,15 +95,9 @@ function fetchActorInfo(){
  * @return {Promise} It resolves if the access is valid, or rejects if it's not valid (or if some error happens)
  */
 function attemptToAccess(){
-   // *Getting the access info from the cache:
-   const access = cache.getAccess();
-   
    // *Retrieving the access status:
    return fetch('/api/v1/accesses', {
-         headers: {
-            [ACCESS_HEADERS.USER]: access.user,
-            [ACCESS_HEADERS.KEY]: access.key
-         }
+         headers: new HeadersBuilder().addAccess().get()
       })
       .then(res => {
          // *Checking the response status:
