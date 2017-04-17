@@ -51,3 +51,36 @@ BEGIN
   END IF;
 END$$
 DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Procedure `fixflow_schema`.`close_ticket`
+-- -----------------------------------------------------
+DROP PROCEDURE IF EXISTS `close_ticket`;
+
+DELIMITER $$ 
+CREATE PROCEDURE `close_ticket`(IN `a_ticket_id` BIGINT)
+BEGIN
+  -- *Declaring the exception handler:
+  DECLARE `_rollback` BOOL DEFAULT 0;
+  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+    SET `_rollback` = 1;
+
+  -- *Starting a new transaction:
+  START TRANSACTION;
+  
+  -- *Closing the ticket:
+  UPDATE `ticket` SET `status` = 'CLOSED', `date_closed` = now() where `id` = `a_ticket_id`;
+  
+  -- *Checking if some exception was raisaed:
+  IF `_rollback` 
+    -- *If it was:
+    -- *Canceling the transaction:
+    THEN ROLLBACK;
+  ELSE 
+    -- *If it wasn't:
+    -- *Accepting the transaction:
+    COMMIT;
+  END IF;
+END$$
+DELIMITER ;

@@ -3,7 +3,7 @@
  * Root
  */
 .custom-header{
-   padding: 0.6em 0.8em;
+   padding: 0.6em 1em;
    background-color: var(--primary-color);
    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.15);
    z-index: 8;
@@ -89,7 +89,6 @@
    display: block;
    font-size: 1.8em;
    font-family: 'Roboto Slab', serif;
-   font-variant: small-caps;
    color: var(--icon-on-primary-color);
 }
 
@@ -100,6 +99,6 @@
    display: block;
    margin-top: 0.2em;
    opacity: 0.8;
-   font-size: 0.9em;
+   font-size: 1em;
    color: var(--icon-on-primary-color);
 }
