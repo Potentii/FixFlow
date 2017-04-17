@@ -108,6 +108,54 @@ module.exports = knex => {
 
 
    /**
+    * Retrieves one resource from the database
+    */
+   function getOneFromOperator(req, res, next){
+      // *Extracting the info from the locals:
+      const operator = res.locals.operator;
+
+      const ticket = req.params.ticket;
+
+      // *Getting the query builder for this resource:
+      return knex('operator')
+         // *Selecting all the available fields:
+         .select('department_fk')
+         // *Adding the condition:
+         .where({ id: operator})
+         // *When the query resolves:
+         .then(items => {
+            // *Checking if any item has been found:
+            if(items.length)
+               // *If it has:
+               // *Getting the query builder for this resource view:
+               return knex('department_tickets')
+                  // *Selecting all the available fields:
+                  .select('*')
+                  // *Adding the condition:
+                  .where({ department_id: items[0].department_fk, id: ticket })
+                  // *When the query resolves:
+                  .then(items => {
+                     // *Checking if any item has been found:
+                     if(items.length)
+                        // *If it has:
+                        // *Sending a '200 OK' response with the first item found:
+                        res.status(200).json(items[0]).end();
+                     else
+                        // *If it hasn't:
+                        // *Sending a '404 NOT FOUND' response:
+                        res.status(404).end();
+                  });
+            else
+               // *If it hasn't:
+               // *Sending a '404 NOT FOUND' response:
+               res.status(404).end();
+         })
+         .catch(err => errors.send(res, err));
+   }
+
+
+
+   /**
     * Retrieves many resources from the database
     */
    function addOnClient(req, res, next){
@@ -128,6 +176,7 @@ module.exports = knex => {
    return {
       getOneFromClient,
       getManyFromClient,
+      getOneFromOperator,
       getManyFromOperator,
       addOnClient
    };

@@ -23,3 +23,17 @@
    display: flex;
    flex-direction: column;
 }
+
+.x-labeled-output{
+   margin-bottom: 1.5em;
+}
+.x-labeled-output > *{
+   display: block;
+}
+.x-labeled-output > .x-label{
+   font-size: 0.9em;
+   color: var(--text-color-faded);
+}
+.x-labeled-output > *:not(.x-label){
+   font-size: 1.05em;
+}
