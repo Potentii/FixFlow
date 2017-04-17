@@ -10,18 +10,82 @@
 }
 
 /**
- * Rows container
+ * Main container
  */
 .custom-header > div{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   height: auto;
+}
+
+/**
+ * Logo and balance containers
+ */
+.custom-header > div > .custom-header-logo-container, .custom-header-balance-container{
+   flex-grow: 0;
+   flex-shrink: 0;
+   width: 20%;
+   height: auto;
+}
+
+/**
+ * Logo container
+ */
+.custom-header > div > .custom-header-logo-container{
+   animation-name: logo-fade-in;
+   animation-duration: 0.2s;
+   animation-timing-function: ease;
+   transform-origin: left;
+}
+
+/**
+ * Logo
+ */
+.custom-header > div > .custom-header-logo-container > a{
+   opacity: 0.8;
+   font-size: 1.5em;
+   font-weight: bold;
+   color: var(--text-on-primary-color);
+
+   transition: opacity 0.2s ease;
+} .custom-header > div > .custom-header-logo-container > a:hover{
+   opacity: 1;
+   cursor: pointer;
+} .custom-header > div > .custom-header-logo-container > a:active{
+   opacity: 0.7;
+}
+/**
+ * Logo animation
+ */
+@keyframes logo-fade-in {
+   0% {
+      opacity: 0;
+      transform: scale(0.8) translateX(-0.5em);
+   },
+   100% {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+   }
+}
+
+
+/**
+ * Text container
+ */
+.custom-header > div > .custom-header-text-container{
+   flex-grow: 0;
+   flex-shrink: 1;
    width: 100%;
-   height: 100%;
    text-align: center;
+} .custom-header > div > .custom-header-text-container:hover{
+   cursor: default;
 }
 
 /**
  * Title span
  */
-.custom-header > div > .custom-header-title{
+.custom-header > div > .custom-header-text-container > .custom-header-title{
    display: block;
    font-size: 1.8em;
    font-family: 'Roboto Slab', serif;
@@ -32,7 +96,7 @@
 /**
  * Subtitle span
  */
-.custom-header > div > .custom-header-subtitle{
+.custom-header > div > .custom-header-text-container > .custom-header-subtitle{
    display: block;
    margin-top: 0.2em;
    opacity: 0.8;

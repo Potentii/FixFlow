@@ -1,17 +1,26 @@
 // *Setting up Vuejs configs:
 Vue.config.silent = ENV==ENVS.PROD ? true : false;
 
+
 // *Signaling that the UI can be initialized:
 pages.done()
    .then(() => {
       // *Logging that the UI is ready:
       (ENV!=ENVS.PROD) && console.info('UI ready');
 
+
+      // *Implementing the MDC initialization middleware:
+      const mdcInit = (to, from) => {
+         // *On the next tick:
+         setTimeout(() => {
+            // *Initializing Material-Design-Components with supressed warnings:
+            mdc.autoInit(document.getElementById('app'), warn => {});
+         }, 0);
+      };
+
+
       // *Implementing the auth middleware:
       const auth = (to, from, next) => {
-         // *Initializing Material-Design-Components with supressed warnings:
-         mdc.autoInit(document, warn => {});
-
          // *Discarding the access check on the '/login' route:
          if(to.fullPath==='/login') return next();
 
@@ -43,11 +52,17 @@ pages.done()
             });
       };
 
+
       // *Adding the auth middleware to all routes:
       pages.router.beforeEach(auth);
+      // *Adding the MDC init to all routes:
+      pages.router.afterEach(mdcInit);
 
       // *Getting the current page path:
       const curr_page = pages.router.history.current;
+
+      // *Calling the initial MDC initialization:
+      mdcInit(curr_page);
 
       // *Calling the initial auth check:
       auth(curr_page, null, () => {});

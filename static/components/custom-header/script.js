@@ -1,5 +1,5 @@
 ui.add('custom-header', {
-   
+
    props: {
       'title': {
          type: String,
@@ -15,8 +15,15 @@ ui.add('custom-header', {
       `
          <div class="custom-header">
             <div>
-               <span class="custom-header-title">{{ title }}</span>
-               <span class="custom-header-subtitle" v-if="subtitle">{{ subtitle }}</span>
+               <div class="custom-header-logo-container">
+                  <router-link :to="'/'">Fix</br>Flow</router-link>
+               </div>
+               <div class="custom-header-text-container">
+                  <span class="custom-header-title">{{ title }}</span>
+                  <span class="custom-header-subtitle" v-if="subtitle">{{ subtitle }}</span>
+               </div>
+               <div class="custom-header-balance-container">
+               </div>
             </div>
          </div>
       `

@@ -12,8 +12,8 @@ pages.add('login', '/login', {
    methods: {
       attemptToLogin(){
          // *Resetting the flags:
-         cred_check_has_failed = false;
-         server_error = false;
+         this.cred_check_has_failed = false;
+         this.server_error = false;
 
          // *Getting the credentials from the model:
          const username = this.username || '';
@@ -34,6 +34,8 @@ pages.add('login', '/login', {
                      .then(({ user, key }) => {
                         // *Saving the access info on cache:
                         cache.setAccess(user, key);
+                        // *Crearing the actor info:
+                        cache.setActor();
 
                         // *Sending the user to the main page:
                         this.$router.push('/');
@@ -41,12 +43,12 @@ pages.add('login', '/login', {
                case 401:
                   // *If the authentication has failed:
                   // *Setting the flag:
-                  cred_check_has_failed = true;
+                  this.cred_check_has_failed = true;
                   break;
                default:
                   // *If some error happened:
                   // *Setting the flag:
-                  server_error = true;
+                  this.server_error = true;
                }
             })
             // *Logging errors:
@@ -60,7 +62,7 @@ pages.add('login', '/login', {
          <form @submit.prevent="attemptToLogin">
 
             <h1>
-               Fix Flow
+               Fix</br>Flow
             </h1>
 
             <label class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
@@ -73,12 +75,14 @@ pages.add('login', '/login', {
                <span class="mdc-textfield__label">Password</span>
             </label>
 
+            <span class="login-page-error-msg" v-if="cred_check_has_failed">Sorry, invalid <b>username</b> and/or <b>password</b></span>
+            <span class="login-page-error-msg" v-if="server_error">Sorry, the server isn't available right now</span>
+
+
             <button type="submit" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
                Login
             </button>
 
-            <span v-if="cred_check_has_failed">Sorry, invalid username and/or password</span>
-            <span v-if="server_error">Sorry, the server isn't available right now</span>
          </form>
       </div>
       `
