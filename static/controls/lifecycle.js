@@ -1,14 +1,6 @@
 // *Setting up Vuejs configs:
 Vue.config.silent = ENV==ENVS.PROD ? true : false;
 
-document.addEventListener('DOMContentLoaded', e => {
-   setTimeout(() => {
-      // TODO put the MDC init on a 'on push' listener:
-      // *Initializing Material-Design-Components with supressed warnings:
-      mdc.autoInit(document, warn => {});
-   }, 100);
-})
-
 
 // *Signaling that the UI can be initialized:
 pages.done()
@@ -16,12 +8,19 @@ pages.done()
       // *Logging that the UI is ready:
       (ENV!=ENVS.PROD) && console.info('UI ready');
 
+
+      // *Implementing the MDC initialization middleware:
+      const mdcInit = (to, from) => {
+         // *On the next tick:
+         setTimeout(() => {
+            // *Initializing Material-Design-Components with supressed warnings:
+            mdc.autoInit(document.getElementById('app'), warn => {});
+         }, 0);
+      };
+
+
       // *Implementing the auth middleware:
       const auth = (to, from, next) => {
-         // TODO put the MDC init on a 'on push' listener:
-         // *Initializing Material-Design-Components with supressed warnings:
-         mdc.autoInit(document, warn => {});
-
          // *Discarding the access check on the '/login' route:
          if(to.fullPath==='/login') return next();
 
@@ -41,11 +40,6 @@ pages.done()
             })
             .then(() => {
                // *If the authentication went ok:
-               setTimeout(() => {
-                  // TODO put the MDC init on a 'on push' listener:
-                  // *Initializing Material-Design-Components with supressed warnings:
-                  mdc.autoInit(document, warn => {});
-               }, 200);
                // *Sending the user to the desired page:
                next();
             })
@@ -53,21 +47,22 @@ pages.done()
                // *If some error happens or the authentication fails:
                // *Logging it out:
                (ENV!=ENVS.PROD) && console.error(err);
-               setTimeout(() => {
-                  // TODO put the MDC init on a 'on push' listener:
-                  // *Initializing Material-Design-Components with supressed warnings:
-                  mdc.autoInit(document, warn => {});
-               }, 200);
                // *Sending the user to the login page:
                pages.router.push('/login');
             });
       };
 
+
       // *Adding the auth middleware to all routes:
       pages.router.beforeEach(auth);
+      // *Adding the MDC init to all routes:
+      pages.router.afterEach(mdcInit);
 
       // *Getting the current page path:
       const curr_page = pages.router.history.current;
+
+      // *Calling the initial MDC initialization:
+      mdcInit(curr_page);
 
       // *Calling the initial auth check:
       auth(curr_page, null, () => {});

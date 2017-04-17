@@ -42,11 +42,15 @@
 }
 
 /**
- * App title
+ * Logo
  */
 .login-page > form > h1{
    align-self: flex-start;
    font-size: 2em;
+   animation-name: logo-fade-in;
+   animation-duration: 0.2s;
+   animation-timing-function: ease;
+   transform-origin: left;
 }
 
 /**
