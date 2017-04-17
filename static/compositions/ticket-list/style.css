@@ -3,4 +3,18 @@
  */
 .ticket-list > li{
    margin-bottom: 0.5em;
+   animation-name: list-fade-in;
+   animation-duration: 0.5s;
+   animation-timing-function: ease;
+}
+
+@keyframes list-fade-in {
+   0% {
+      opacity: 0;
+      transform: translateX(0.5em);
+   },
+   100% {
+      opacity: 1;
+      transform: translateX(0);
+   }
 }

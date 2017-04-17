@@ -51,7 +51,7 @@ pages.add('new-ticket', '/new-ticket', {
                      .then(info => {
                         // TODO show a snack
                         // *Sending the user to the ticket view page:
-                        this.$router.push({ path: '/ticket', query: {t: info.id} });
+                        this.$router.push('/ticket/' + info.id);
                      });
                case 400:
                   // *If some input was incorrect:

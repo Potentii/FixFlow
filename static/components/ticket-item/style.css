@@ -24,7 +24,7 @@
    position: absolute;
    top: 0;
    left: 0;
-   width: 4px;
+   width: 3px;
    height: 100%;
 } .ticket-item[data-status="PENDING"]::before{
    background-color: #D50000;

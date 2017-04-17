@@ -79,6 +79,7 @@ function start({ routes, port }){
           */
          .most('/api/v1/operators/*', [routes.accesses.check, routes.actors.extractOperator])
          .get('/api/v1/operators/tickets', routes.tickets.getManyFromOperator)
+         .get('/api/v1/operators/tickets/:ticket/close', routes.tickets.closeTicket)
          .get('/api/v1/operators/tickets/:ticket', routes.tickets.getOneFromOperator)
 
          .done()

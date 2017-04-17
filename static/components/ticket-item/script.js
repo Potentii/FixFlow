@@ -18,7 +18,7 @@ ui.add('ticket-item', {
 
    template:
       `
-         <li class="ticket-item" @click="$router.push({ path: '/ticket', query: {t: data.id} })" :data-status="data.status">
+         <li class="ticket-item" @click="$router.push('/ticket/' + data.id)" :data-status="data.status">
             <div>
                <div>
                   <span class="ticket-item-title">{{ data.title }}</span>

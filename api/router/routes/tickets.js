@@ -172,13 +172,36 @@ module.exports = knex => {
 
 
 
+   /**
+    * Marks a ticket as closed
+    */
+   function closeTicket(req, res, next){
+      // *Extracting the info from the locals:
+      //const operator = res.locals.operator;
+      // TODO verify if this operator has the permission to close this ticket (i.e. if this ticket belongs to their department)
+
+      // *Getting the ticket id from the request:
+      const ticket = req.params.ticket;
+
+      // *Closing the ticket:
+      knex.schema.raw('CALL ??(?)', ['close_ticket', ticket])
+         .then(() => {
+            // *Sending a '200 OK' response, as the ticket has been successfully closed:
+            res.status(200).end();
+         })
+         .catch(err => errors.send(res, err));
+   }
+
+
+
    // *Returning the routes available:
    return {
       getOneFromClient,
       getManyFromClient,
       getOneFromOperator,
       getManyFromOperator,
-      addOnClient
+      addOnClient,
+      closeTicket
    };
 
 };
