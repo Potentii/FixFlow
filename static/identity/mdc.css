@@ -12,6 +12,10 @@
    margin-left: 2em;
 }
 
+.mdc-textfield > .mdc-textfield__input{
+   width: 100%;
+}
+
 .mdc-textfield textarea{
    font-family: 'Roboto', sans-serif !important;
 }

@@ -10,7 +10,7 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
          ticket_fk: undefined,
 
          rating: undefined,
-         resolved: 'true',
+         solved: 'true',
          message: undefined,
 
          rating_values: ['Excelent', 'Good', 'Regular', 'Bad', 'Very bad']
@@ -32,7 +32,7 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
          // *Building the data to be sent:
          const data = {
             rating: (rating>-1) ? rating : undefined,
-            resolved: (this.resolved==='true') ? true : false,
+            solved: (this.solved==='true') ? true : false,
             message: this.message
          };
 
@@ -55,7 +55,7 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
                      .then(info => {
                         // TODO show a snack
                         // *Sending the user to the feedback view page:
-                        this.$router.push('/ticket/' + this.ticket_fk + '/feedback');
+                        this.$router.replace('/ticket/' + this.ticket_fk + '/feedback');
                      });
                case 400:
                   // *If some input was incorrect:
@@ -84,11 +84,11 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
          <div class="content-wrapper">
             <form id="give-feedback-page-form" class="content" @submit.prevent="submit">
 
-               <div class="give-feedback-page-form-rating-group radio-group">
+               <div class="give-feedback-page-form-solved-group radio-group">
                   <label>Has the ticket been solved?</label>
                   <div class="radio-group-options">
                      <label class="mdc-radio" data-mdc-auto-init="MDCRadio">
-                        <input class="mdc-radio__native-control" type="radio" value="true" v-model="resolved" name="resolved-radio" checked>
+                        <input class="mdc-radio__native-control" type="radio" value="true" v-model="solved" name="solved-radio" checked>
                         <div class="mdc-radio__background">
                            <div class="mdc-radio__outer-circle"></div>
                            <div class="mdc-radio__inner-circle"></div>
@@ -97,7 +97,7 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
                      </label>
 
                      <label class="mdc-radio" data-mdc-auto-init="MDCRadio">
-                        <input class="mdc-radio__native-control" type="radio" value="false" v-model="resolved" name="resolved-radio">
+                        <input class="mdc-radio__native-control" type="radio" value="false" v-model="solved" name="solved-radio">
                         <div class="mdc-radio__background">
                            <div class="mdc-radio__outer-circle"></div>
                            <div class="mdc-radio__inner-circle"></div>
