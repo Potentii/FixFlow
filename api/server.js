@@ -77,7 +77,7 @@ function start({ routes, port }){
          /**
           * Client-actor feedback
           */
-         .get('/api/v1/clients/tickets/:ticket/feedback', routes.feedback.get)
+         .get('/api/v1/clients/tickets/:ticket/feedback', routes.feedback.getFromClient)
          .post('/api/v1/clients/tickets/:ticket/feedback', routes.feedback.add)
 
          /**
@@ -87,6 +87,12 @@ function start({ routes, port }){
          .get('/api/v1/operators/tickets', routes.tickets.getManyFromOperator)
          .get('/api/v1/operators/tickets/:ticket/close', routes.tickets.closeTicket)
          .get('/api/v1/operators/tickets/:ticket', routes.tickets.getOneFromOperator)
+
+         /**
+          * Operator-actor feedback
+          */
+         .get('/api/v1/operators/tickets/:ticket/feedback', routes.feedback.getFromOperator)
+
 
          .done()
 

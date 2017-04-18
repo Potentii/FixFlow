@@ -8,7 +8,6 @@ pages.done()
       // *Logging that the UI is ready:
       (ENV!=ENVS.PROD) && console.info('UI ready');
 
-
       // *Implementing the MDC initialization middleware:
       const mdcInit = (to, from) => {
          // *On the next tick:

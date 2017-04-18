@@ -16,7 +16,7 @@ module.exports = knex => {
    /**
     * Retrieves one resource from the database
     */
-   function get(req, res, next){
+   function getFromClient(req, res, next){
       // *Extracting the info from the locals:
       const client = res.locals.client;
       // *Extracting the info from the request:
@@ -63,6 +63,20 @@ module.exports = knex => {
 
 
    /**
+    * Retrieves one resource from the database
+    */
+   function getFromOperator(req, res, next){
+      // *Extracting the info from the locals:
+      const operator = res.locals.operator;
+      // *Extracting the info from the request:
+      const ticket = req.params.ticket;
+
+      // TODO
+   }
+
+
+
+   /**
     * Add a feedback
     */
    function add(req, res, next){
@@ -104,7 +118,8 @@ module.exports = knex => {
 
    // *Returning the routes available:
    return {
-      get,
+      getFromClient,
+      getFromOperator,
       add
    };
 
