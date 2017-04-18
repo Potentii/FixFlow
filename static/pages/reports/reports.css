@@ -1,0 +1,75 @@
+
+/**
+ * Content
+ */
+.reports-page .content{
+   width: 50% !important;
+}
+/**
+ * On mobile
+ */
+@media (max-width: 700px) {
+   .reports-page .content{
+      width: 95% !important;
+   }
+}
+
+/**
+ * Each report section
+ */
+.reports-page .content > *{
+   margin-bottom: 2em;
+   display: block;
+}
+
+/**
+ * Status report items
+ */
+.reports-page .reports-status-list > li{
+   display: flex;
+   flex-direction: row;
+   padding: 0.7em 0.9em;
+   border-radius: 2px;
+   box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.05);
+   background-color: var(--color-strong);
+   transition: background-color 0.2s ease;
+   overflow: hidden;
+   margin-bottom: 0.5em;
+}
+/**
+ * Status name
+ */
+.reports-page .reports-status-list > li > span:nth-of-type(1){
+   text-transform: lowercase;
+   flex-grow: 1;
+}
+/**
+ * Status percentage
+ */
+.reports-page .reports-status-list > li > span:nth-of-type(2){
+   flex-grow: 0;
+   flex-shrink: 1;
+}
+/**
+ * Status stripe
+ */
+.reports-page .reports-status-list > li::before{
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 3px;
+   height: 100%;
+} .reports-page .reports-status-list > li[data-status="PENDING"]::before{
+   background-color: #D50000;
+} .reports-page .reports-status-list > li[data-status="SOLVING"]::before{
+   background-color: #FFC400;
+} .reports-page .reports-status-list > li[data-status="CLOSED"]::before{
+   background-color: #00C853;
+}
+
+
+.reports-page .reports-sla-avg-hours{
+   font-size: 2em;
+   font-weight: bold;
+}

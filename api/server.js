@@ -66,7 +66,7 @@ function start({ routes, port }){
          .post('/api/v1/categories', routes.categories.add)
          .put('/api/v1/categories/:id', routes.categories.update)
          .delete('/api/v1/categories/:id', routes.categories.remove)
-
+         
          /**
           * Client-actor tickets
           */
@@ -93,6 +93,9 @@ function start({ routes, port }){
           * Operator-actor feedback
           */
          .get('/api/v1/operators/tickets/:ticket/feedback', routes.feedback.getFromOperator)
+
+
+         .get('/api/v1/reports', [routes.accesses.check, routes.actors.extractOperator, routes.reports.generate])
 
 
          .done()

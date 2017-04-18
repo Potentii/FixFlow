@@ -9,23 +9,23 @@
 /**
  * Title and description
  */
-.new-ticket-page .new-ticket-page-form-title, .new-ticket-page-form-description{
+.new-ticket-page .new-ticket-page-form-title, .new-ticket-page .new-ticket-page-form-description{
    width: 75%;
 }
 /**
  * Category picker
  */
-.new-ticket-page-form-category{
+.new-ticket-page .new-ticket-page-form-category{
    width: 20em !important;
 }
 /**
  * On mobile
  */
 @media (max-width: 600px){
-   .new-ticket-page .new-ticket-page-form-title, .new-ticket-page-form-description{
+   .new-ticket-page .new-ticket-page-form-title, .new-ticket-page .new-ticket-page-form-description{
       width: 100%;
    }
-   .new-ticket-page-form-category{
+   .new-ticket-page .new-ticket-page-form-category{
       width: 100% !important;
    }
 }

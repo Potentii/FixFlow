@@ -22,13 +22,16 @@ pages.add('index', '/', {
             <ticket-list class="content"></ticket-list>
          </div>
 
-         <template v-if="getActorType()==ACTORS.CLIENT">
-            <custom-footer>
-               <button type="button" @click="$router.push('/new-ticket')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
-                  + new ticket
-               </button>
-            </custom-footer>
-         </template>
+
+         <custom-footer>
+            <button type="button" v-if="getActorType()==ACTORS.CLIENT" @click="$router.push('/new-ticket')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+               + new ticket
+            </button>
+            <button type="button" v-if="getActorType()==ACTORS.OPERATOR" @click="$router.push('/reports')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+               generate reports
+            </button>
+         </custom-footer>
+
 
       </div>
       `
