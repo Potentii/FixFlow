@@ -1,0 +1,31 @@
+
+/**
+ * Form rows
+ */
+.give-feedback-page > div:nth-child(2) > form > *{
+   margin-bottom: 2.5em;
+}
+
+/**
+ * Message
+ */
+.give-feedback-page .give-feedback-page-form-message{
+   width: 75%;
+}
+/**
+ * Rating picker
+ */
+.give-feedback-page-form-rating{
+   width: 10em !important;
+}
+/**
+ * On mobile
+ */
+@media (max-width: 600px){
+   .give-feedback-page .give-feedback-page-form-message{
+      width: 100%;
+   }
+   .give-feedback-page-form-rating{
+      width: 100% !important;
+   }
+}
