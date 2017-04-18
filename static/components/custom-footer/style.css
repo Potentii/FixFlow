@@ -23,3 +23,9 @@
    height: 100%;
    flex-direction: row-reverse;
 }
+/**
+ * Slot elements
+ */
+.custom-footer > div > *{
+   margin-left: 2em;
+}

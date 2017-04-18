@@ -30,9 +30,12 @@ ui.add('ticket-list', {
          fetch(this.getTicketRoute(), {
                headers: new HeadersBuilder().addAccess().get()
             })
-            .then(res => res.json())
-            .then(items => {
-               this.items = items;
+            .then(res => {
+               if(res.status == 200)
+                  return res.json()
+                     .then(items => {
+                        this.items = items;
+                     });
             })
             // *Logging errors:
             .catch(err => (ENV!=ENVS.PROD) && console.error(err));

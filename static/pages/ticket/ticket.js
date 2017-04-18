@@ -10,6 +10,7 @@ pages.add('ticket', '/ticket/:id', {
          id: undefined,
 
          item: {},
+         has_feedback: true,
 
          date_local: 'pt-BR'
       };
@@ -29,6 +30,22 @@ pages.add('ticket', '/ticket/:id', {
       load(){
          // *Getting the ticket id from the query:
          const ticket_id = this.id;
+
+         // *Getting the feedback data:
+         fetch(this.getActorType()==ACTORS.CLIENT ? '/api/v1/clients/tickets/' + ticket_id + '/feedback' : '/api/v1/operators/tickets/' + ticket_id + '/feedback', {
+               headers: new HeadersBuilder().addAccess().get()
+            })
+            .then(res => {
+               switch(res.status){
+                  case 200:
+                     this.has_feedback = true;
+                     break;
+                  default:
+                     this.has_feedback = false;
+               }
+            })
+            // *Logging errors:
+            .catch(err => (ENV!=ENVS.PROD) && console.error(err));
 
 
          // *Getting the ticket data:
@@ -81,6 +98,8 @@ pages.add('ticket', '/ticket/:id', {
 
          <div class="content-wrapper">
 
+            <div class="content">
+
                <label class="x-labeled-output">
                   <span class="x-label">Title</span>
                   <span>{{ item.title }}</span>
@@ -97,6 +116,11 @@ pages.add('ticket', '/ticket/:id', {
                </label>
 
                <label class="x-labeled-output">
+                  <span class="x-label">Description</span>
+                  <span>{{ item.description }}</span>
+               </label>
+
+               <label class="x-labeled-output">
                   <span class="x-label">Opening date</span>
                   <span>{{ new Date(item.date_opened).toLocaleDateString(date_local) }}</span>
                   <span>{{ new Date(item.date_opened).toLocaleTimeString(date_local) }}</span>
@@ -109,17 +133,23 @@ pages.add('ticket', '/ticket/:id', {
                   <span v-if="!item.date_closed">Not closed yet</span>
                </label>
 
+            </div>
+
          </div>
 
-         <template v-if="getActorType()==ACTORS.OPERATOR && item.status!='CLOSED'">
+         <template v-if="getActorType()==ACTORS.OPERATOR && (item.status!='CLOSED' || has_feedback)">
             <custom-footer>
-               <button type="button" @click="closeTicket" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+               <button v-if="item.status!='CLOSED'" type="button" @click="closeTicket" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
                   close ticket
+               </button>
+
+               <button v-if="has_feedback" type="button" @click="$router.push('/ticket/' + $route.params.id + '/feedback')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+                  see feedback
                </button>
             </custom-footer>
          </template>
 
-         <template v-if="getActorType()==ACTORS.CLIENT && item.status=='CLOSED'">
+         <template v-if="!has_feedback && getActorType()==ACTORS.CLIENT && item.status=='CLOSED'">
             <custom-footer>
                <button type="button" @click="$router.push('/ticket/' + $route.params.id + '/give-feedback')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
                   give feedback
