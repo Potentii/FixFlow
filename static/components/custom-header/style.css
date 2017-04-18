@@ -102,3 +102,15 @@
    font-size: 1em;
    color: var(--icon-on-primary-color);
 }
+
+
+.custom-header-balance-container{
+   display: flex;
+   flex-direction: row-reverse;
+}
+
+.custom-header-balance-container > button{
+   color: var(--text-on-primary-color);
+   font-size: 0.9em;
+   text-transform: uppercase;
+}

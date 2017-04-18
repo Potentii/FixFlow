@@ -51,6 +51,7 @@ function start({ routes, port }){
           */
          .get('/api/v1/accesses', routes.accesses.check)
          .post('/api/v1/accesses', [routes.credentials.check, routes.accesses.add])
+         .delete('/api/v1/accesses', [routes.accesses.check, routes.accesses.revoke])
 
          /**
           * Actors routes (e.g. clients/operators id extraction)
