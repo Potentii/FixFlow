@@ -55,7 +55,7 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
                      .then(info => {
                         // TODO show a snack
                         // *Sending the user to the feedback view page:
-                        this.$router.replace('/ticket/' + this.ticket_fk + '/feedback');
+                        this.$router.replace('/ticket/' + this.ticket_fk);
                      });
                case 400:
                   // *If some input was incorrect:

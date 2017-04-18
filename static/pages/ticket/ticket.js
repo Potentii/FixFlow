@@ -137,10 +137,14 @@ pages.add('ticket', '/ticket/:id', {
 
          </div>
 
-         <template v-if="getActorType()==ACTORS.OPERATOR && item.status!='CLOSED'">
+         <template v-if="getActorType()==ACTORS.OPERATOR && (item.status!='CLOSED' || has_feedback)">
             <custom-footer>
-               <button type="button" @click="closeTicket" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+               <button v-if="item.status!='CLOSED'" type="button" @click="closeTicket" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
                   close ticket
+               </button>
+
+               <button v-if="has_feedback" type="button" @click="$router.push('/ticket/' + $route.params.id + '/feedback')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+                  see feedback
                </button>
             </custom-footer>
          </template>
@@ -149,14 +153,6 @@ pages.add('ticket', '/ticket/:id', {
             <custom-footer>
                <button type="button" @click="$router.push('/ticket/' + $route.params.id + '/give-feedback')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
                   give feedback
-               </button>
-            </custom-footer>
-         </template>
-
-         <template v-if="has_feedback">
-            <custom-footer>
-               <button type="button" @click="$router.push('/ticket/' + $route.params.id + '/feedback')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
-                  see feedback
                </button>
             </custom-footer>
          </template>

@@ -50,7 +50,7 @@ module.exports = knex => {
                         // *If it hasn't:
                         // *Sending a '404 NOT FOUND' response:
                         res.status(404).end();
-                  })
+                  });
             } else{
                // *If it hasn't:
                // *Sending a '404 NOT FOUND' response:
@@ -71,7 +71,57 @@ module.exports = knex => {
       // *Extracting the info from the request:
       const ticket = req.params.ticket;
 
-      // TODO
+
+      return knex('operator')
+
+         .select('department_fk')
+         // *Adding the condition:
+         .where({ id: operator})
+         // *When the query resolves:
+         .then(items => {
+            // *Checking if any item has been found:
+            if(items.length)
+               // *If it has:
+
+               return knex('department_tickets')
+                  // *Selecting only the id:
+                  .select('id')
+                  // *Adding the condition:
+                  .where({ department_id: items[0].department_fk, id: ticket })
+                  // *When the query resolves:
+                  .then(items => {
+                     // *Checking if any item has been found:
+                     if(items.length)
+                        // *If it has:
+                        // *Getting the query builder for this resource:
+                        return knex(entity_name)
+                           // *Selecting all the available fields:
+                           .select('*')
+                           // *Adding the condition:
+                           .where({ ticket_fk: ticket })
+                           // *When the query resolves:
+                           .then(items => {
+                              // *Checking if any item has been found:
+                              if(items.length)
+                                 // *If it has:
+                                 // *Sending a '200 OK' response with the first item found:
+                                 res.status(200).json(items[0]).end();
+                              else
+                                 // *If it hasn't:
+                                 // *Sending a '404 NOT FOUND' response:
+                                 res.status(404).end();
+                           });
+                     else
+                        // *If it hasn't:
+                        // *Sending a '403 FORBIDDEN' response:
+                        res.status(403).end();
+                  });
+            else
+               // *If it hasn't:
+               // *Sending a '404 NOT FOUND' response:
+               res.status(404).end();
+         })
+         .catch(err => errors.send(res, err));
    }
 
 
