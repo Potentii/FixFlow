@@ -98,9 +98,9 @@ function start({ routes, port }){
 
 
          // *Setting up the operator tickets routes:
-         .get('/api/v1/operators/tickets',               [routes.actors.extractOperator, routes.tickets.getManyFromOperator])
-         .get('/api/v1/operators/tickets/:ticket/close', [routes.actors.extractOperator, routes.tickets.closeTicket])
-         .get('/api/v1/operators/tickets/:ticket',       [routes.actors.extractOperator, routes.tickets.getOneFromOperator])
+         .get('/api/v1/operators/tickets',                        [routes.actors.extractOperator, routes.tickets.getManyFromOperator])
+         .get('/api/v1/operators/tickets/:ticket/status/advance', [routes.actors.extractOperator, routes.tickets.advanceStatus])
+         .get('/api/v1/operators/tickets/:ticket',                [routes.actors.extractOperator, routes.tickets.getOneFromOperator])
 
          // *Setting up the operator feedback routes:
          .get('/api/v1/operators/tickets/:ticket/feedback', [routes.actors.extractOperator, routes.feedback.getFromOperator])
@@ -117,7 +117,7 @@ function start({ routes, port }){
          // *Setting up the reports routes:
          .get('/api/v1/reports', [routes.actors.extractOperator, routes.reports.generate])
 
-         
+
 
          // *Finishing the API routes configuration:
          .done()

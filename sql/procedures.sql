@@ -60,13 +60,15 @@ DELIMITER ;
 
 
 -- -----------------------------------------------------
--- Procedure `fixflow_schema`.`close_ticket`
+-- Procedure `fixflow_schema`.`advance_ticket_status`
 -- -----------------------------------------------------
-DROP PROCEDURE IF EXISTS `close_ticket`;
+DROP PROCEDURE IF EXISTS `advance_ticket_status`;
 
 DELIMITER $$ 
-CREATE PROCEDURE `close_ticket`(IN `a_ticket_id` BIGINT)
+CREATE PROCEDURE `advance_ticket_status`(IN `a_ticket_id` BIGINT)
 BEGIN
+  DECLARE `curr_status` ENUM('PENDING', 'SOLVING', 'CLOSED');
+
   -- *Declaring the exception handler:
   DECLARE `_rollback` BOOL DEFAULT 0;
   DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
@@ -75,8 +77,15 @@ BEGIN
   -- *Starting a new transaction:
   START TRANSACTION;
   
-  -- *Closing the ticket:
-  UPDATE `ticket` SET `status` = 'CLOSED', `date_closed` = now() where `id` = `a_ticket_id`;
+  SELECT `status` INTO `curr_status` FROM `ticket` WHERE `id` = `a_ticket_id`;
+  
+  IF `curr_status` = 'PENDING' THEN
+    -- *Solving the ticket:
+    UPDATE `ticket` SET `status` = 'SOLVING' WHERE `id` = `a_ticket_id`;
+  ELSEIF `curr_status` = 'SOLVING' THEN
+    -- *Closing the ticket:
+    UPDATE `ticket` SET `status` = 'CLOSED', `date_closed` = NOW() WHERE `id` = `a_ticket_id`;
+  END IF;
   
   -- *Checking if some exception was raisaed:
   IF `_rollback` 

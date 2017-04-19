@@ -173,20 +173,20 @@ module.exports = knex => {
 
 
    /**
-    * Marks a ticket as closed
+    * Advances the ticket status
     */
-   function closeTicket(req, res, next){
+   function advanceStatus(req, res, next){
       // *Extracting the info from the locals:
       //const operator = res.locals.operator;
-      // TODO verify if this operator has the permission to close this ticket (i.e. if this ticket belongs to their department)
+      // TODO verify if this operator has the permission to advance this ticket (i.e. if this ticket belongs to their department)
 
       // *Getting the ticket id from the request:
       const ticket = req.params.ticket;
 
       // *Closing the ticket:
-      knex.schema.raw('CALL ??(?)', ['close_ticket', ticket])
+      knex.schema.raw('CALL ??(?)', ['advance_ticket_status', ticket])
          .then(() => {
-            // *Sending a '200 OK' response, as the ticket has been successfully closed:
+            // *Sending a '200 OK' response, as the ticket status has been successfully advanced:
             res.status(200).end();
          })
          .catch(err => errors.send(res, err));
@@ -201,7 +201,7 @@ module.exports = knex => {
       getOneFromOperator,
       getManyFromOperator,
       addOnClient,
-      closeTicket
+      advanceStatus
    };
 
 };

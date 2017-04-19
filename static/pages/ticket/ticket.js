@@ -58,12 +58,12 @@ pages.add('ticket', '/ticket/:id', {
             .catch(err => (ENV!=ENVS.PROD) && console.error(err));
       },
 
-      closeTicket(){
+      advanceStatus(){
          // *Getting the ticket id from the query:
          const ticket_id = this.id;
 
-         // *Closing the ticket:
-         fetch('/api/v1/operators/tickets/' + ticket_id + '/close', {
+         // *Advancing the ticket status:
+         fetch('/api/v1/operators/tickets/' + ticket_id + '/status/advance', {
                headers: new HeadersBuilder().addAccess().get()
             })
             .then(res => {
@@ -135,9 +135,13 @@ pages.add('ticket', '/ticket/:id', {
 
          </div>
 
-         <template v-if="getActorType()==ACTORS.OPERATOR && (item.status!='CLOSED' || has_feedback)">
+         <template v-if="getActorType()==ACTORS.OPERATOR && (item.status=='PENDING' || item.status=='SOLVING' || has_feedback)">
             <custom-footer>
-               <button v-if="item.status!='CLOSED'" type="button" @click="closeTicket" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+               <button v-if="item.status=='PENDING'" type="button" @click="advanceStatus" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+                  mark as solving
+               </button>
+
+               <button v-if="item.status=='SOLVING'" type="button" @click="advanceStatus" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
                   close ticket
                </button>
 
