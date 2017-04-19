@@ -75,10 +75,42 @@ module.exports = knex => {
 
 
 
+   /**
+    * Removes a acces token
+    *  Does requires access authentication
+    */
+   function revoke(req, res, next){
+      // *Extracting the info from the request:
+      const key = req.get('Access-Key') || '';
+
+      // *Getting the query builder for this resource:
+      return knex(entity_name)
+         // *Adding a delete statement to the query:
+         .del()
+         // *Adding the condition:
+         .where({ key })
+         // *When the query resolves:
+         .then(affected_rows => {
+            // *Checking if this query did affect any instances:
+            if(affected_rows)
+               // *If it did:
+               // *Sending a '200 OK' response:
+               res.status(200).end();
+            else
+               // *If it didn't:
+               // *Sending a '404 NOT FOUND' response:
+               res.status(404).end();
+         })
+         .catch(err => errors.send(res, err));
+   }
+
+
+
    // *Returning the routes available:
    return {
       check,
-      add
+      add,
+      revoke
    };
 
 };

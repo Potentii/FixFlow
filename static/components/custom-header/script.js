@@ -11,6 +11,31 @@ ui.add('custom-header', {
       }
    },
 
+   methods: {
+      logoff(){
+         fetch('/api/v1/accesses', {
+            method: 'DELETE',
+            headers: new HeadersBuilder()
+               .addAccess()
+               .get()
+         })
+         .then(res => {
+            switch(res.status){
+               case 200:
+                  cache.setAccess();
+                  cache.setActor();
+                  this.$router.push('/login');
+                  break;
+               default:
+                  throw new Error('database error');
+            }
+         })
+         // *Logging errors:
+         .catch(err => (ENV!=ENVS.PROD) && console.error(err));
+
+      }
+   },
+
    template:
       `
          <div class="custom-header">
@@ -23,6 +48,9 @@ ui.add('custom-header', {
                   <span class="custom-header-subtitle" v-if="subtitle">{{ subtitle }}</span>
                </div>
                <div class="custom-header-balance-container">
+                  <button type="button" @click="logoff">
+                     Exit
+                  </button>
                </div>
             </div>
          </div>

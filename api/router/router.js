@@ -10,6 +10,7 @@ module.exports = knex => {
       feedback: require('./routes/feedback.js')(knex),
       credentials: require('./routes/credentials.js')(knex),
       actors: require('./routes/actors.js')(knex),
-      accesses: require('./routes/accesses.js')(knex)
+      accesses: require('./routes/accesses.js')(knex),
+      reports: require('./routes/reports.js')(knex)
    };
 };

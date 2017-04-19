@@ -23,8 +23,9 @@
    --text-color-faded: #757575;
    --text-color-faded-max: #BDBDBD;
    --text-on-primary-color: #FAFAFA;
+   --mdc-theme-text-primary-on-primary: var(--text-on-primary-color)!important;
    --text-on-accent-color: #F5F5F5;
-   --mdc-theme-text-primary-on-accent: var(--text-on-accent-color)!important;
+   --mdc-theme-text-primary-on-accent: var(--text-on-accent-color) !important;
 }
 
 /**

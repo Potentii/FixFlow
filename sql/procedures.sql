@@ -90,3 +90,43 @@ BEGIN
   END IF;
 END$$
 DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- Procedure `fixflow_schema`.`generate_reports`
+-- -----------------------------------------------------
+DROP PROCEDURE IF EXISTS `generate_reports`;
+
+DELIMITER $$ 
+CREATE PROCEDURE `generate_reports`()
+BEGIN
+  -- *Declaring the exception handler:
+  DECLARE `_rollback` BOOL DEFAULT 0;
+  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+    SET `_rollback` = 1;
+
+  -- *Starting a new transaction:
+  START TRANSACTION;
+  
+  SELECT COUNT(*) 'tickets_qty' FROM `ticket`;
+  
+  SELECT COUNT(*) 'tickets_qty', `status` FROM `ticket` GROUP BY `status` ORDER BY `status` DESC;
+  
+  SELECT COUNT(*) 'feedbacks_qty' FROM `feedback`;
+
+  SELECT COUNT(*) 'feedbacks_qty', `rating` FROM `feedback` GROUP BY `rating` ORDER BY `rating` DESC;
+
+  SELECT AVG(timestampdiff(HOUR, `date_opened`, `date_closed`)) 'avg_response_hours' FROM `ticket` WHERE `date_closed` is not null;
+  
+  -- *Checking if some exception was raisaed:
+  IF `_rollback` 
+    -- *If it was:
+    -- *Canceling the transaction:
+    THEN ROLLBACK;
+  ELSE 
+    -- *If it wasn't:
+    -- *Accepting the transaction:
+    COMMIT;
+  END IF;
+END$$
+DELIMITER ;

@@ -9,7 +9,7 @@ set names 'utf8';
 -- -----------------------------------------------------
 USE `fixflow_schema`;
 
-select * from department_tickets where department_id = 4;
+
 -- -----------------------------------------------------
 -- View `fixflow_schema`.`department_tickets`
 -- -----------------------------------------------------
