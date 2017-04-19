@@ -10,9 +10,7 @@ pages.add('ticket', '/ticket/:id', {
          id: undefined,
 
          item: {},
-         has_feedback: true,
-
-         date_local: 'pt-BR'
+         has_feedback: true
       };
    },
 
@@ -122,14 +120,14 @@ pages.add('ticket', '/ticket/:id', {
 
                <label class="x-labeled-output">
                   <span class="x-label">Opening date</span>
-                  <span>{{ new Date(item.date_opened).toLocaleDateString(date_local) }}</span>
-                  <span>{{ new Date(item.date_opened).toLocaleTimeString(date_local) }}</span>
+                  <span>{{ new Date(item.date_opened).toLocaleDateString(LOCALE) }}</span>
+                  <span>{{ new Date(item.date_opened).toLocaleTimeString(LOCALE) }}</span>
                </label>
 
                <label class="x-labeled-output">
                   <span class="x-label">Closing date</span>
-                  <span v-if="item.date_closed">{{ new Date(item.date_closed).toLocaleDateString(date_local) }}</span>
-                  <span v-if="item.date_closed">{{ new Date(item.date_closed).toLocaleTimeString(date_local) }}</span>
+                  <span v-if="item.date_closed">{{ new Date(item.date_closed).toLocaleDateString(LOCALE) }}</span>
+                  <span v-if="item.date_closed">{{ new Date(item.date_closed).toLocaleTimeString(LOCALE) }}</span>
                   <span v-if="!item.date_closed">Not closed yet</span>
                </label>
 
@@ -149,10 +147,14 @@ pages.add('ticket', '/ticket/:id', {
             </custom-footer>
          </template>
 
-         <template v-if="!has_feedback && getActorType()==ACTORS.CLIENT && item.status=='CLOSED'">
+         <template v-if="getActorType()==ACTORS.CLIENT && item.status=='CLOSED'">
             <custom-footer>
-               <button type="button" @click="$router.push('/ticket/' + $route.params.id + '/give-feedback')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+               <button type="button" v-if="!has_feedback" @click="$router.push('/ticket/' + $route.params.id + '/give-feedback')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
                   give feedback
+               </button>
+
+               <button type="button" v-if="has_feedback" @click="$router.push('/ticket/' + $route.params.id + '/feedback')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
+                  see feedback
                </button>
             </custom-footer>
          </template>

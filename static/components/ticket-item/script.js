@@ -6,16 +6,6 @@ ui.add('ticket-item', {
       }
    },
 
-   data(){
-      return {
-         date_local: 'en-US'
-      };
-   },
-
-   mounted(){
-      this.date_local = 'pt-BR';
-   },
-
    template:
       `
          <li class="ticket-item" @click="$router.push('/ticket/' + data.id)" :data-status="data.status">
@@ -23,8 +13,8 @@ ui.add('ticket-item', {
                <div>
                   <span class="ticket-item-title">{{ data.title }}</span>
                   <div class="ticket-item-date-container">
-                     <span class="ticket-item-date-opened" title="opening date">{{ new Date(data.date_opened).toLocaleDateString(date_local) }}</span>
-                     <span class="ticket-item-date-closed" title="closing date" v-if="data.status=='CLOSED'"> - {{ new Date(data.date_closed).toLocaleDateString(date_local) }}</span>
+                     <span class="ticket-item-date-opened" title="opening date">{{ new Date(data.date_opened).toLocaleDateString(LOCALE) }}</span>
+                     <span class="ticket-item-date-closed" title="closing date" v-if="data.status=='CLOSED'"> - {{ new Date(data.date_closed).toLocaleDateString(LOCALE) }}</span>
                   </div>
                </div>
                <div>

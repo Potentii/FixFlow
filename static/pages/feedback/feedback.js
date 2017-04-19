@@ -7,12 +7,7 @@ pages.add('feedback', '/ticket/:id/feedback', {
    data(){
       return {
          ticket_id: undefined,
-
-         item: {},
-
-         date_local: 'pt-BR',
-
-         rating_values: ['Excelent', 'Good', 'Regular', 'Bad', 'Very bad']
+         item: {}
       };
    },
 
@@ -59,7 +54,7 @@ pages.add('feedback', '/ticket/:id/feedback', {
 
                <label class="x-labeled-output">
                   <span class="x-label">Service quality</span>
-                  <span>{{ item.rating!==undefined ? rating_values[Number(rating_values.length-1-item.rating)] : '' }}</span>
+                  <span>{{ item.rating!==undefined ? ticket_rating.numberToText(item.rating) : '' }}</span>
                </label>
 
                <label class="x-labeled-output">
@@ -69,14 +64,14 @@ pages.add('feedback', '/ticket/:id/feedback', {
 
                <label class="x-labeled-output">
                   <span class="x-label">Sent at</span>
-                  <span>{{ new Date(item.date).toLocaleDateString(date_local) }}</span>
-                  <span>{{ new Date(item.date).toLocaleTimeString(date_local) }}</span>
+                  <span>{{ new Date(item.date).toLocaleDateString(LOCALE) }}</span>
+                  <span>{{ new Date(item.date).toLocaleTimeString(LOCALE) }}</span>
                </label>
 
             </div>
 
          </div>
-         
+
       </div>
       `
 });

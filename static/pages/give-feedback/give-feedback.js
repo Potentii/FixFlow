@@ -11,9 +11,7 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
 
          rating: undefined,
          solved: 'true',
-         message: undefined,
-
-         rating_values: ['Excelent', 'Good', 'Regular', 'Bad', 'Very bad']
+         message: undefined
       };
    },
 
@@ -24,14 +22,9 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
    methods: {
 
       submit(){
-         // *Converting the selected rating to a 0-4 number:
-         const rating = this.rating_values
-            .reverse()
-            .indexOf(this.rating);
-
          // *Building the data to be sent:
          const data = {
-            rating: (rating>-1) ? rating : undefined,
+            rating: this.rating ? this.rating.number : undefined,
             solved: (this.solved==='true') ? true : false,
             message: this.message
          };
@@ -114,8 +107,8 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
                         <span class="mdc-select__selected-text"></span>
                         <div class="mdc-simple-menu mdc-select__menu" data-mdc-auto-init="MDCSimpleMenu">
                            <ul class="mdc-list mdc-simple-menu__items">
-                              <li class="mdc-list-item" role="option" tabindex="0" @click="rating = rv" v-for="rv in rating_values">
-                                 {{ rv }}
+                              <li class="mdc-list-item" role="option" tabindex="0" @click="rating = rv" v-for="rv in ticket_rating.asArray()">
+                                 {{ rv.text }}
                               </li>
                            </ul>
                         </div>
