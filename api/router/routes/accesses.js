@@ -21,7 +21,7 @@ module.exports = knex => {
     *  i.e. authentication
     */
    function check(req, res, next){
-      // *Extracting the info from the request:
+      // *Extracting the access info from the request headers:
       const user = req.get('Access-User') || '';
       const key = req.get('Access-Key') || '';
 
@@ -29,7 +29,7 @@ module.exports = knex => {
       return knex('access')
          // *Selecting all the columns:
          .select()
-         // *Adding the condition:
+         // *Getting the access that has this key, and references the given user:
          .where({ key, user_fk: user })
          // *When the query resolves:
          .then(items => {
@@ -66,6 +66,7 @@ module.exports = knex => {
          user_fk: res.locals.user
       };
 
+      // *Adding the access in the database:
       return crud_routes_factory.add(req, res, next, { insert_data }, (body) => {
          // *If everything went fine:
          // *Sending a '201 CREATED' response with the generated key and the user id:

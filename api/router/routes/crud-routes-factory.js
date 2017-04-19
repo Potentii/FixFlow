@@ -14,7 +14,7 @@ function getOne(table_name, knex, req, res, next, { id }){
    // *Getting the query builder for this resource:
    return knex(table_name)
       // *Selecting all the available fields:
-      .select('*')
+      .select()
       // *Adding the condition:
       .where({ id })
       // *When the query resolves:
@@ -44,7 +44,7 @@ function getMany(table_name, knex, req, res, next){
    // *Getting the query builder for this resource:
    return knex(table_name)
       // *Selecting all the available fields:
-      .select('*')
+      .select()
       // *When the query resolves:
       .then(items => {
          // *Sending a '200 OK' response with all the found items:

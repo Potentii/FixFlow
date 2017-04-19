@@ -7,9 +7,18 @@ const errors = require('../errors.js');
 module.exports = knex => {
 
 
-
+   /**
+    * [getActor description]
+    * @param  {[type]} entity_name [description]
+    * @param  {[type]} user        [description]
+    * @return {[type]}             [description]
+    */
    function getActor(entity_name, user){
-      // *Getting the query builder for a resource:
+      // *Rejecting if the entity isn't an actor:
+      if(entity_name !== 'client' && entity_name !== 'operator')
+         return Promise.reject(new Error('invalid actor resource'));
+
+      // *Getting the query builder for an actor resource:
       return knex(entity_name)
          // *Selecting the id:
          .select('id')
@@ -21,11 +30,11 @@ module.exports = knex => {
             if(items.length)
                // *If it has:
                // *Resolving with the actor's id:
-               return Promise.resolve(items[0].id);
+               return items[0].id;
              else
                // *If it hasn't:
                // *Resolving with null:
-               return Promise.resolve(null);
+               return null;
          });
    }
 
@@ -36,7 +45,7 @@ module.exports = knex => {
     *  Does requires authentication
     */
    function extractClient(req, res, next){
-      // *Extracting the info from the locals:
+      // *Extracting the user id from the locals:
       const user = res.locals.user;
 
       // *Trying to retrieve the actor:
@@ -65,7 +74,7 @@ module.exports = knex => {
     *  Does requires authentication
     */
    function extractOperator(req, res, next){
-      // *Extracting the info from the locals:
+      // *Extracting the user id from the locals:
       const user = res.locals.user;
 
       // *Trying to retrieve the actor:
@@ -89,8 +98,12 @@ module.exports = knex => {
 
 
 
+   /**
+    * Retrieves the actor info (id and type)
+    *  Does requires authentication
+    */
    function get(req, res, next){
-      // *Extracting the info from the locals:
+      // *Extracting the user id from the locals:
       const user = res.locals.user;
 
       // *Trying to retrieve the actor as a client:

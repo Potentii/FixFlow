@@ -9,20 +9,21 @@ module.exports = knex => {
    const entity_name = 'user';
 
 
+
    /**
     * Checks if the supplied credentials headers are valid
     *  i.e. login
     */
    function check(req, res, next){
-      // *Extracting the info from the request:
+      // *Extracting the credentials from the request headers:
       const username = req.get('Credential-User') || '';
       const password = req.get('Credential-Pass') || '';
 
       // *Getting the query builder for this resource:
       return knex(entity_name)
-         // *Selecting all the available fields:
+         // *Selecting the id:
          .select('id')
-         // *Adding the condition:
+         // *Checking the users that matches the username/password:
          .where({ username, password })
          // *When the query resolves:
          .then(items => {
@@ -43,6 +44,7 @@ module.exports = knex => {
          })
          .catch(err => errors.send(res, err));
    }
+
 
 
    // *Returning the routes available:

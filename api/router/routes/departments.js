@@ -7,7 +7,7 @@ const errors = require('../errors.js');
 module.exports = knex => {
 
    // *Defining the entity name:
-   const entity_name = 'category';
+   const entity_name = 'department';
 
    // *Requiring the default CRUD routes factory for this resource:
    const crud_routes_factory = require('./crud-routes-factory.js')(entity_name, knex);
@@ -42,8 +42,7 @@ module.exports = knex => {
    function add(req, res, next){
       // *Extracting the insert data from the request's body:
       const insert_data = {
-         name: req.body.name,
-         department_fk: req.body.department_fk
+         name: req.body.name
       };
 
       // *Executing the default CRUD route:
@@ -61,8 +60,7 @@ module.exports = knex => {
 
       // *Extracting the update data from the request's body:
       const update_data = {
-         name: req.body.name,
-         department_fk: req.body.department_fk
+         name: req.body.name
       };
 
       // *Executing the default CRUD route:

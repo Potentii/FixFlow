@@ -71,7 +71,9 @@ pages.add('new-ticket', '/new-ticket', {
 
       fetchCategories(){
          // *Getting all the available categories from server:
-         fetch('/api/v1/categories')
+         fetch('/api/v1/categories', {
+               headers: new HeadersBuilder().addAccess().get()
+            })
             // *Parsing the response body:
             .then(res => res.json())
             // *Updating the view:

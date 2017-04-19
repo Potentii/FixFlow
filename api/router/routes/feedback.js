@@ -72,6 +72,7 @@ module.exports = knex => {
       const ticket = req.params.ticket;
 
 
+
       return knex('operator')
 
          .select('department_fk')

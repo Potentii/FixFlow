@@ -25,7 +25,7 @@ module.exports = knex => {
       // *Getting the query builder for this resource:
       return knex(entity_name)
          // *Selecting all the available fields:
-         .select('*')
+         .select()
          // *Adding the condition:
          .where({ id: ticket, client_fk: client })
          // *When the query resolves:
@@ -55,7 +55,7 @@ module.exports = knex => {
       // *Getting the query builder for this resource:
       return knex(entity_name)
          // *Selecting all the available fields:
-         .select('*')
+         .select()
          // *Adding the condition:
          .where({ client_fk: client })
          // *When the query resolves:

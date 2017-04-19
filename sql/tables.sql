@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `fixflow_schema`.`department` ;
 
 CREATE TABLE IF NOT EXISTS `fixflow_schema`.`department` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(127) NULL,
+  `name` VARCHAR(127) NOT NULL,
   `date` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `fixflow_schema`.`category` ;
 
 CREATE TABLE IF NOT EXISTS `fixflow_schema`.`category` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(127) NULL,
+  `name` VARCHAR(127) NOT NULL,
   `department_fk` BIGINT UNSIGNED NOT NULL,
   `date` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
@@ -62,8 +62,8 @@ DROP TABLE IF EXISTS `fixflow_schema`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `fixflow_schema`.`user` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(24) NULL,
-  `password` VARCHAR(24) NULL,
+  `username` VARCHAR(24) NOT NULL,
+  `password` VARCHAR(24) NOT NULL,
   `date` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
@@ -78,7 +78,7 @@ DROP TABLE IF EXISTS `fixflow_schema`.`access` ;
 
 CREATE TABLE IF NOT EXISTS `fixflow_schema`.`access` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `key` VARCHAR(36) NULL,
+  `key` VARCHAR(36) NOT NULL,
   `user_fk` BIGINT UNSIGNED NOT NULL,
   `date` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`id`),
