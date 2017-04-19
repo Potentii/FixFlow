@@ -34,6 +34,7 @@ ui.add('ticket-list', {
                if(res.status == 200)
                   return res.json()
                      .then(items => {
+                        items.sort((a, b) => a.id - b.id);
                         this.items = items;
                      });
             })

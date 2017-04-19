@@ -23,13 +23,13 @@ ui.add('ticket-item', {
                <div>
                   <span class="ticket-item-title">{{ data.title }}</span>
                   <div class="ticket-item-date-container">
-                     <span class="ticket-item-date-opened">{{ new Date(data.date_opened).toLocaleDateString(date_local) }}</span>
-                     <span class="ticket-item-date-separator" v-if="data.status=='CLOSED'">-</span>
-                     <span class="ticket-item-date-closed" v-if="data.status=='CLOSED'">{{ new Date(data.date_closed).toLocaleDateString(date_local) }}</span>
+                     <span class="ticket-item-date-opened" title="opening date">{{ new Date(data.date_opened).toLocaleDateString(date_local) }}</span>
+                     <span class="ticket-item-date-closed" title="closing date" v-if="data.status=='CLOSED'"> - {{ new Date(data.date_closed).toLocaleDateString(date_local) }}</span>
                   </div>
                </div>
                <div>
                   <span class="ticket-item-description">{{ data.description }}</span>
+                  <i class="material-icons" :title="'urgency: ' + data.urgency" :data-status="data.status" :data-urgency="data.urgency">whatshot</i>
                </div>
             </div>
          </li>

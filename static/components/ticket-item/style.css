@@ -45,8 +45,9 @@
    flex-direction: column;
 }
 
+
 /**
- * Fisrt row:
+ * Fisrt row
  */
 .ticket-item > div > div:nth-of-type(1){
    display: flex;
@@ -56,24 +57,54 @@
 /**
  * Title span
  */
-.ticket-item > div > div > .ticket-item-title{
+.ticket-item > div > div:nth-of-type(1) > .ticket-item-title{
    font-size: 1.05em;
    color: var(--text-color-strong);
+   vertical-align: middle;
    flex-grow: 1;
 }
 /**
  * Dates container
  */
-.ticket-item > div > div > .ticket-item-date-container{
+.ticket-item > div > div:nth-of-type(1) > .ticket-item-date-container{
    font-size: 0.7em;
    color: var(--text-color-faded-max);
    text-align: right;
 }
 
+
+/**
+ * Second row
+ */
+.ticket-item > div > div:nth-of-type(2){
+   display: flex;
+   flex-direction: row;
+}
 /**
  * Description span
  */
-.ticket-item > div > div > .ticket-item-description{
+.ticket-item > div > div:nth-of-type(2) > .ticket-item-description{
    font-size: 0.9em;
    color: var(--text-color-faded);
+   flex-grow: 1;
+}
+/**
+ * Urgency icon
+ */
+.ticket-item > div > div:nth-of-type(2) > .material-icons{
+   font-size: 1em;
+   margin-left: 0.3em;
+   color: var(--icon-on-primary-color);
+   padding: 0.25em;
+   border-radius: 50%;
+   flex-shrink: 0;
+   align-self: flex-end;
+} .ticket-item > div > div:nth-of-type(2) > .material-icons[data-urgency="LOW"]{
+   background-color: rgba(139, 195, 74, 0.8);
+} .ticket-item > div > div:nth-of-type(2) > .material-icons[data-urgency="MEDIUM"]{
+   background-color: rgba(255, 193, 7, 0.8);
+} .ticket-item > div > div:nth-of-type(2) > .material-icons[data-urgency="HIGH"]{
+   background-color: rgba(255, 87, 34, 0.8);
+} .ticket-item > div > div:nth-of-type(2) > .material-icons[data-status="CLOSED"]{
+   opacity: 0.35;
 }
