@@ -18,10 +18,11 @@ module.exports = knex => {
          .then(result => {
             // *Building the reports data to be sent:
             const reports = {
-               tickets_qty: result[0][0][0].tickets_qty,
+               tickets_qty:   result[0][0][0].tickets_qty,
                status_result: result[0][1],
-               rating_result: result[0][2],
-               sla_result: result[0][3][0]
+               feedbacks_qty: result[0][2][0].feedbacks_qty,
+               rating_result: result[0][3],
+               sla_result:    result[0][4][0]
             };
 
             // *Sending a '200 OK' response, with the report data:

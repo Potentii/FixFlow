@@ -38,7 +38,23 @@
 .x-labeled-output > .x-label{
    font-size: 0.9em;
    color: var(--text-color-faded);
+
+   animation-name: labels-fade-in;
+   animation-duration: 0.3s;
+   animation-timing-function: ease;
 }
 .x-labeled-output > *:not(.x-label){
    font-size: 1.05em;
+
+   animation-name: labels-fade-in;
+   animation-duration: 0.8s;
+   animation-timing-function: ease;
+}
+@keyframes labels-fade-in {
+   0% {
+      opacity: 0;
+   },
+   100% {
+      opacity: 1;
+   }
 }

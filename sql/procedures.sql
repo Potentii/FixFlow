@@ -110,9 +110,11 @@ BEGIN
   
   SELECT COUNT(*) 'tickets_qty' FROM `ticket`;
   
-  SELECT COUNT(*) 'tickets_qty', `status` FROM `ticket` GROUP BY `status`;
+  SELECT COUNT(*) 'tickets_qty', `status` FROM `ticket` GROUP BY `status` ORDER BY `status` DESC;
+  
+  SELECT COUNT(*) 'feedbacks_qty' FROM `feedback`;
 
-  SELECT COUNT(*) 'tickets_qty', `rating` FROM `feedback` GROUP BY `rating`;
+  SELECT COUNT(*) 'feedbacks_qty', `rating` FROM `feedback` GROUP BY `rating` ORDER BY `rating` DESC;
 
   SELECT AVG(timestampdiff(HOUR, `date_opened`, `date_closed`)) 'avg_response_hours' FROM `ticket` WHERE `date_closed` is not null;
   

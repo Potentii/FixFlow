@@ -28,7 +28,7 @@ pages.add('index', '/', {
                + new ticket
             </button>
             <button type="button" v-if="getActorType()==ACTORS.OPERATOR" @click="$router.push('/reports')" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
-               generate reports
+               reports
             </button>
          </custom-footer>
 
