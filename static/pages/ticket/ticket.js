@@ -172,7 +172,7 @@ pages.add('ticket', '/ticket/:id', {
          <template v-if="getActorType()==ACTORS.OPERATOR && (item.status=='PENDING' || item.status=='SOLVING' || has_feedback)">
             <custom-footer>
                <button v-if="item.status=='PENDING'" type="button" @click="advanceStatus" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">
-                  mark as solving
+                  set as solving
                </button>
 
                <button v-if="item.status=='SOLVING'" type="button" @click="advanceStatus" class="mdc-button mdc-button--raised mdc-button--accent" data-mdc-auto-init="MDCRipple">

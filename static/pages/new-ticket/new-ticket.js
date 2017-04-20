@@ -96,12 +96,8 @@ pages.add('new-ticket', '/new-ticket', {
          <custom-header title="Create" subtitle="a new ticket"></custom-header>
 
          <div class="content-wrapper">
-            <form id="new-ticket-page-form" class="content" @submit.prevent="submit">
 
-               <label class="new-ticket-page-form-title mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input type="text" class="mdc-textfield__input" v-model="title" required>
-                  <span class="mdc-textfield__label">Title</span>
-               </label>
+            <form id="new-ticket-page-form" class="content" @submit.prevent="submit">
 
                <div class="new-ticket-page-form-urgency-group radio-group">
                   <label>Urgency</label>
@@ -145,6 +141,11 @@ pages.add('new-ticket', '/new-ticket', {
                      </ul>
                   </div>
                </div>
+
+               <label class="new-ticket-page-form-title mdc-textfield" data-mdc-auto-init="MDCTextfield">
+                  <input type="text" class="mdc-textfield__input" v-model="title" required>
+                  <span class="mdc-textfield__label">Title</span>
+               </label>
 
                <label class="new-ticket-page-form-description mdc-textfield mdc-textfield--multiline mdc-textfield--fullwidth" data-mdc-auto-init="MDCTextfield">
                   <textarea class="mdc-textfield__input" rows="3" v-model="description" required></textarea>

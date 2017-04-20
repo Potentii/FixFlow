@@ -3,6 +3,7 @@
  */
 .ticket-list > li{
    margin-bottom: 0.5em;
+
    animation-name: list-fade-in;
    animation-duration: 0.5s;
    animation-timing-function: ease;

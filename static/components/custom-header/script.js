@@ -57,7 +57,7 @@ ui.add('custom-header', {
                   <span class="custom-header-title">{{ title }}</span>
                   <span class="custom-header-subtitle" v-if="subtitle">{{ subtitle }}</span>
                </div>
-               <div class="custom-header-balance-container">
+               <div class="custom-header-logoff-container">
                   <button type="button" @click="logoff">
                      Exit
                   </button>
