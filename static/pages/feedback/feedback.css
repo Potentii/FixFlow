@@ -1,4 +1,78 @@
 
-.feedback-page > .content-wrapper > .content > *{
+/**
+ * Labels
+ */
+.feedback-page > .content-wrapper > .content > .x-labeled-output{
    display: block;
+   max-width: 80%;
+}
+/**
+ * On mobile
+ */
+@media (max-width: 600px) {
+   .feedback-page > .content-wrapper > .content > .x-labeled-output{
+      max-width: 100%;
+   }
+}
+
+/**
+ * Small boxes
+ */
+.feedback-page .feedback-solved-label,
+.feedback-page .feedback-rating-label{
+   display: inline-block;
+}
+/**
+ * On mobile
+ */
+@media (max-width: 600px) {
+   .feedback-page .feedback-solved-label,
+   .feedback-page .feedback-rating-label{
+      display: block;
+   }
+}
+
+/**
+ * Solved box
+ */
+.feedback-page .feedback-solved-label::before{
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 3px;
+   height: 100%;
+} .feedback-page .feedback-solved-label[data-solved="true"]::before{
+   background-color: #00C853;
+} .feedback-page .feedback-solved-label[data-solved="false"]::before{
+   background-color: #D50000;
+}
+
+/**
+ * Rating box
+ */
+.feedback-page .feedback-rating-label::before{
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 3px;
+   height: 100%;
+} .feedback-page .feedback-rating-label[data-rating="0"]::before{
+   background-color: #D50000;
+} .feedback-page .feedback-rating-label[data-rating="1"]::before{
+   background-color: #FF6D00;
+} .feedback-page .feedback-rating-label[data-rating="2"]::before{
+   background-color: #FFD600;
+} .feedback-page .feedback-rating-label[data-rating="3"]::before{
+   background-color: #AEEA00;
+} .feedback-page .feedback-rating-label[data-rating="4"]::before{
+   background-color: #00C853;
+}
+
+/**
+ * Message
+ */
+.feedback-page .feedback-message-label{
+   white-space: pre-wrap;
 }
