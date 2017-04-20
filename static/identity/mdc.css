@@ -20,6 +20,10 @@
    font-family: 'Roboto', sans-serif !important;
 }
 
+.mdc-snackbar{
+   z-index: 10;
+}
+
 .radio-group > *{
    display: block;
 }
@@ -38,6 +42,7 @@
 .x-labeled-output > .x-label{
    font-size: 0.9em;
    color: var(--text-color-faded);
+   will-change: opacity;
 
    animation-name: labels-fade-in;
    animation-duration: 0.3s;
@@ -45,6 +50,7 @@
 }
 .x-labeled-output > *:not(.x-label){
    font-size: 1.05em;
+   will-change: opacity;
 
    animation-name: labels-fade-in;
    animation-duration: 0.8s;

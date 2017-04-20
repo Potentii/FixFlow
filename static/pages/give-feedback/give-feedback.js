@@ -46,18 +46,21 @@ pages.add('give-feedback', '/ticket/:id/give-feedback', {
                   // *Parsing the response body:
                   return res.json()
                      .then(info => {
-                        // TODO show a snack
+                        // *Showing a snack:
+                        snack.show('Feedback saved', snack.SHORT);
                         // *Sending the user to the feedback view page:
                         this.$router.replace('/ticket/' + this.ticket_fk);
                      });
                case 400:
                   // *If some input was incorrect:
-                  // TODO show a snack
+                  // *Showing an error snack:
+                  snack.error('There are some invalid information', snack.LONG);
                   // *Throwing an error:
                   throw new Error('invalid data');
                default:
                   // *If other error happened:
-                  // TODO show a snack
+                  // *Showing an error snack:
+                  snack.error('The server couldn\'t proccess your request', snack.LONG);
                   // *Throwing an error:
                   throw new Error('server error');
             }

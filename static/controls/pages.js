@@ -47,7 +47,7 @@ const pages = (function(){
 
       /**
        * Signals that the UI can be initialized
-       * @return Promise A promise that resolves when the UI gets initialized, or rejects if some error has been thrown
+       * @return {Promise} A promise that resolves when the UI gets initialized, or rejects if some error has been thrown
        */
       done(){
          // *Returning the initialization promise chain:

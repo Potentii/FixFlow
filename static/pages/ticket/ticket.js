@@ -15,55 +15,81 @@ pages.add('ticket', '/ticket/:id', {
    },
 
    mounted(){
+      // *Getting the ticket id from the url:
       this.id = this.$route.params.id;
+      // *Loading the data:
       this.load();
    },
 
    methods: {
 
       getActorType(){
+         // *Returning the current user's actor type (i.e. client/operator):
          return cache.getActor().type;
       },
 
-      load(){
-         // *Getting the ticket id from the query:
-         const ticket_id = this.id;
+      
 
-         // *Getting the feedback data:
-         fetch(this.getActorType()==ACTORS.CLIENT ? '/api/v1/clients/tickets/' + ticket_id + '/feedback' : '/api/v1/operators/tickets/' + ticket_id + '/feedback', {
+      load(){
+         // *Getting the ticket data:
+         fetch(this.getActorType()==ACTORS.CLIENT ? '/api/v1/clients/tickets/' + this.id : '/api/v1/operators/tickets/' + this.id, {
                headers: new HeadersBuilder().addAccess().get()
             })
             .then(res => {
+               // *Checking the response status:
                switch(res.status){
                   case 200:
+                     // *If everything went fine:
+                     // *Parsing the response body:
+                     return res.json()
+                        .then(item => {
+                           // *Update feedback button view:
+                           this.updateFeedbackButton();
+                           // *Updating the view:
+                           this.item = item;
+                        });
+                  case 500:
+                     // *If other error happened:
+                     // *Showing an error snack:
+                     snack.error('The server couldn\'t proccess your request', snack.LONG);
+                     // *Throwing an error:
+                     throw new Error('server error');
+               }
+            })
+            // *Logging errors:
+            .catch(err => (ENV!=ENVS.PROD) && console.error(err));
+      },
+
+
+
+      updateFeedbackButton(){
+         // *Getting the feedback data:
+         fetch(this.getActorType()==ACTORS.CLIENT ? '/api/v1/clients/tickets/' + this.id + '/feedback' : '/api/v1/operators/tickets/' + this.id + '/feedback', {
+               headers: new HeadersBuilder().addAccess().get()
+            })
+            .then(res => {
+               // *Checking the response status:
+               switch(res.status){
+                  case 200:
+                     // *If a feedback has been found:
+                     // *Updating the view:
                      this.has_feedback = true;
                      break;
                   default:
+                     // *If no feedback has been found:
+                     // *Updating the view:
                      this.has_feedback = false;
                }
             })
             // *Logging errors:
             .catch(err => (ENV!=ENVS.PROD) && console.error(err));
-
-
-         // *Getting the ticket data:
-         fetch(this.getActorType()==ACTORS.CLIENT ? '/api/v1/clients/tickets/' + ticket_id : '/api/v1/operators/tickets/' + ticket_id, {
-               headers: new HeadersBuilder().addAccess().get()
-            })
-            // *Parsing the response body:
-            .then(res => res.json())
-            // *Updating the view:
-            .then(item => this.item = item)
-            // *Logging errors:
-            .catch(err => (ENV!=ENVS.PROD) && console.error(err));
       },
 
-      advanceStatus(){
-         // *Getting the ticket id from the query:
-         const ticket_id = this.id;
 
+
+      advanceStatus(){
          // *Advancing the ticket status:
-         fetch('/api/v1/operators/tickets/' + ticket_id + '/status/advance', {
+         fetch('/api/v1/operators/tickets/' + this.id + '/status/advance', {
                headers: new HeadersBuilder().addAccess().get()
             })
             .then(res => {
@@ -71,13 +97,15 @@ pages.add('ticket', '/ticket/:id', {
                switch(res.status){
                case 200:
                   // *If everything went fine:
-                  // TODO show a snack
+                  // *Showing a snack:
+                  snack.show('Ticket status changed', snack.SHORT);
                   // *Updating the view:
                   this.load();
                   break;
                default:
                   // *If other error happened:
-                  // TODO show a snack
+                  // *Showing an error snack:
+                  snack.error('The server couldn\'t proccess your request', snack.LONG);
                   // *Throwing an error:
                   throw new Error('server error');
                }

@@ -37,6 +37,7 @@
    animation-duration: 0.2s;
    animation-timing-function: ease;
    transform-origin: left;
+   will-change: transform, opacity;
 }
 
 /**
