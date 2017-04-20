@@ -47,6 +47,7 @@
    animation-name: list-fade-in;
    animation-duration: 0.5s;
    animation-timing-function: ease;
+   will-change: transform, opacity;
 }
 /**
  * Status report items

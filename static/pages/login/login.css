@@ -47,10 +47,12 @@
 .login-page > form > h1{
    align-self: flex-start;
    font-size: 2em;
+
    animation-name: logo-fade-in;
    animation-duration: 0.2s;
    animation-timing-function: ease;
    transform-origin: left;
+   will-change: transform, opacity;
 }
 
 /**
@@ -81,6 +83,7 @@
 
    animation-name: fade-from-top;
    animation-duration: 0.7s;
+   will-change: transform, opacity;
 }
 /**
  * Error message animation

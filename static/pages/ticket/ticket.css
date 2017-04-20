@@ -1,4 +1,82 @@
 
-.ticket-page > .content-wrapper > .content > *{
+/**
+ * Labels
+ */
+.ticket-page > .content-wrapper > .content > .x-labeled-output{
    display: block;
+   max-width: 80%;
+}
+/**
+ * On mobile
+ */
+@media (max-width: 600px) {
+   .ticket-page > .content-wrapper > .content > .x-labeled-output{
+      max-width: 100%;
+   }
+}
+
+/**
+ * Small boxes
+ */
+.ticket-page .ticket-status-label,
+.ticket-page .ticket-urgency-label{
+   display: inline-block;
+}
+/**
+ * On mobile
+ */
+@media (max-width: 600px) {
+   .ticket-page .ticket-status-label,
+   .ticket-page .ticket-urgency-label{
+      display: block;
+   }
+}
+
+/**
+ * Status box
+ */
+.ticket-page .ticket-status-label::before{
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 3px;
+   height: 100%;
+} .ticket-page .ticket-status-label[data-status="PENDING"]::before{
+   background-color: #D50000;
+} .ticket-page .ticket-status-label[data-status="SOLVING"]::before{
+   background-color: #FFC400;
+} .ticket-page .ticket-status-label[data-status="CLOSED"]::before{
+   background-color: #00C853;
+}
+
+/**
+ * Urgency box
+ */
+.ticket-page .ticket-urgency-label > *{
+   vertical-align: middle;
+}
+/**
+ * Urgency box icon
+ */
+.ticket-page .ticket-urgency-label > .material-icons{
+   font-size: 1em;
+   margin-right: 0.5em;
+   color: var(--icon-on-primary-color);
+   padding: 0.25em;
+   border-radius: 50%;
+
+} .ticket-page .ticket-urgency-label[data-urgency="LOW"] > .material-icons{
+   background-color: rgba(139, 195, 74, 0.8);
+} .ticket-page .ticket-urgency-label[data-urgency="MEDIUM"] > .material-icons{
+   background-color: rgba(255, 193, 7, 0.8);
+} .ticket-page .ticket-urgency-label[data-urgency="HIGH"] > .material-icons{
+   background-color: rgba(255, 87, 34, 0.8);
+}
+
+/**
+ * Description
+ */
+.ticket-page .ticket-description-label{
+   white-space: pre-wrap;
 }

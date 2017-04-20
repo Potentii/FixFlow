@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="/static/identity/colors.css">
       <link rel="stylesheet" href="/static/identity/typography.css">
       <link rel="stylesheet" href="/static/identity/content-page.css">
+      <link rel="stylesheet" href="/static/identity/x-utils.css">
 
       <!-- * Libraries * -->
       <link  href="/static/libs/material-components-web/dist/material-components-web.min.css" rel="stylesheet">
@@ -34,6 +35,7 @@
       <script src="/static/controls/cache.js"></script>
       <script src="/static/controls/headers.js"></script>
       <script src="/static/controls/ticket-rating.js"></script>
+      <script src="/static/controls/snack.js"></script>
 
       <!-- * Elements * -->
 
@@ -81,8 +83,19 @@
       <title>FixFlow</title>
    </head>
    <body>
+
+      <!-- * App * -->
       <div id="app">
          <router-view></router-view>
       </div>
+
+      <!-- * Snackbar * -->
+      <div class="mdc-snackbar" aria-live="assertive" aria-atomic="true" aria-hidden="true">
+         <div class="mdc-snackbar__text"></div>
+         <div class="mdc-snackbar__action-wrapper">
+            <button class="mdc-button mdc-snackbar__action-button material-icons" type="button"></button>
+         </div>
+      </div>
+
    </body>
 </html>

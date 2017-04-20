@@ -12,7 +12,9 @@ ui.add('custom-header', {
    },
 
    methods: {
+
       logoff(){
+         // *Removing the user's access:
          fetch('/api/v1/accesses', {
             method: 'DELETE',
             headers: new HeadersBuilder()
@@ -20,20 +22,28 @@ ui.add('custom-header', {
                .get()
          })
          .then(res => {
+            // *Checking the response status:
             switch(res.status){
                case 200:
+                  // *If everything went fine:
+                  // *Cleaning the cache:
                   cache.setAccess();
                   cache.setActor();
+                  // *Sending the user to the login page:
                   this.$router.push('/login');
                   break;
                default:
-                  throw new Error('database error');
+                  // *If some error happens:
+                  // *Showing an error snack:
+                  snack.error('The server couldn\'t proccess your request', snack.LONG);
+                  // *Throwing an error:
+                  throw new Error('server error');
             }
          })
          // *Logging errors:
          .catch(err => (ENV!=ENVS.PROD) && console.error(err));
-
       }
+
    },
 
    template:
@@ -47,7 +57,7 @@ ui.add('custom-header', {
                   <span class="custom-header-title">{{ title }}</span>
                   <span class="custom-header-subtitle" v-if="subtitle">{{ subtitle }}</span>
                </div>
-               <div class="custom-header-balance-container">
+               <div class="custom-header-logoff-container">
                   <button type="button" @click="logoff">
                      Exit
                   </button>

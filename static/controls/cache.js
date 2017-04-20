@@ -11,6 +11,7 @@ const cache = (function(){
       ACTOR_TYPE: 'at'
    });
 
+
    function getAccess(){
       return {
          user: localStorage.getItem(KEYS.ACCESS_USER) || '',
@@ -18,15 +19,18 @@ const cache = (function(){
       };
    }
 
+
    function setAccess(user='', key=''){
       localStorage.setItem(KEYS.ACCESS_USER, user);
       localStorage.setItem(KEYS.ACCESS_KEY, key);
    }
 
+
    function hasAccess(){
       const access = getAccess();
       return access.user && access.key;
    }
+
 
    function getActor(){
       return {
@@ -35,15 +39,18 @@ const cache = (function(){
       };
    }
 
+
    function setActor(id='', type=''){
       localStorage.setItem(KEYS.ACTOR_ID, id);
       localStorage.setItem(KEYS.ACTOR_TYPE, type);
    }
 
+
    function hasActor(){
       const actor = getActor();
       return actor.id && actor.type;
    }
+
 
    // *Returning this module:
    return Object.freeze({

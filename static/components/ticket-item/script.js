@@ -1,4 +1,5 @@
 ui.add('ticket-item', {
+   
    props: {
       'data': {
          type: Object,

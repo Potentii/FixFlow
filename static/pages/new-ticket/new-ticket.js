@@ -29,7 +29,7 @@ pages.add('new-ticket', '/new-ticket', {
             title: this.title,
             urgency: this.urgency,
             description: this.description,
-            category_fk: this.category.id
+            category_fk: this.category ? this.category.id : undefined
          };
 
          // *Trying to create the ticket:
@@ -49,18 +49,21 @@ pages.add('new-ticket', '/new-ticket', {
                   // *Parsing the response body:
                   return res.json()
                      .then(info => {
-                        // TODO show a snack
+                        // *Showing a snack:
+                        snack.show('Ticket created', snack.SHORT);
                         // *Sending the user to the ticket view page:
                         this.$router.replace('/ticket/' + info.id);
                      });
                case 400:
                   // *If some input was incorrect:
-                  // TODO show a snack
+                  // *Showing an error snack:
+                  snack.error('There are some invalid information', snack.LONG);
                   // *Throwing an error:
                   throw new Error('invalid data');
                default:
                   // *If other error happened:
-                  // TODO show a snack
+                  // *Showing an error snack:
+                  snack.error('The server couldn\'t proccess your request', snack.LONG);
                   // *Throwing an error:
                   throw new Error('server error');
             }
@@ -68,6 +71,8 @@ pages.add('new-ticket', '/new-ticket', {
          // *Logging errors:
          .catch(err => (ENV!=ENVS.PROD) && console.error(err));
       },
+
+
 
       fetchCategories(){
          // *Getting all the available categories from server:
@@ -91,12 +96,8 @@ pages.add('new-ticket', '/new-ticket', {
          <custom-header title="Create" subtitle="a new ticket"></custom-header>
 
          <div class="content-wrapper">
-            <form id="new-ticket-page-form" class="content" @submit.prevent="submit">
 
-               <label class="new-ticket-page-form-title mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                  <input type="text" class="mdc-textfield__input" v-model="title" required>
-                  <span class="mdc-textfield__label">Title</span>
-               </label>
+            <form id="new-ticket-page-form" class="content" @submit.prevent="submit">
 
                <div class="new-ticket-page-form-urgency-group radio-group">
                   <label>Urgency</label>
@@ -140,6 +141,11 @@ pages.add('new-ticket', '/new-ticket', {
                      </ul>
                   </div>
                </div>
+
+               <label class="new-ticket-page-form-title mdc-textfield" data-mdc-auto-init="MDCTextfield">
+                  <input type="text" class="mdc-textfield__input" v-model="title" required>
+                  <span class="mdc-textfield__label">Title</span>
+               </label>
 
                <label class="new-ticket-page-form-description mdc-textfield mdc-textfield--multiline mdc-textfield--fullwidth" data-mdc-auto-init="MDCTextfield">
                   <textarea class="mdc-textfield__input" rows="3" v-model="description" required></textarea>

@@ -49,23 +49,25 @@ pages.add('feedback', '/ticket/:id/feedback', {
 
                <label class="x-labeled-output">
                   <span class="x-label">Has the ticket been solved?</span>
-                  <span>{{ item.solved ? 'Yes' : 'No' }}</span>
+                  <span class="feedback-solved-label -card" :data-solved="item.solved?'true':'false'">{{ item.solved ? 'Yes' : 'No' }}</span>
                </label>
 
                <label class="x-labeled-output">
                   <span class="x-label">Service quality</span>
-                  <span>{{ item.rating!==undefined ? ticket_rating.numberToText(item.rating) : '' }}</span>
+                  <span class="feedback-rating-label -card" :data-rating="item.rating">{{ item.rating!==undefined ? ticket_rating.numberToText(item.rating) : '' }}</span>
                </label>
 
                <label class="x-labeled-output">
                   <span class="x-label">Aditional feedback</span>
-                  <span>{{ item.message ? item.message : 'No aditional feedback' }}</span>
+                  <span class="feedback-message-label -card">{{ item.message ? item.message : 'No aditional feedback' }}</span>
                </label>
 
                <label class="x-labeled-output">
                   <span class="x-label">Sent at</span>
-                  <span>{{ new Date(item.date).toLocaleDateString(LOCALE) }}</span>
-                  <span>{{ new Date(item.date).toLocaleTimeString(LOCALE) }}</span>
+                  <span class="x-datetime-label -card">
+                     <span class="x-time">{{ new Date(item.date).toLocaleTimeString(LOCALE) }}</span>
+                     <span class="x-date">{{ new Date(item.date).toLocaleDateString(LOCALE) }}</span>
+                  </span>
                </label>
 
             </div>

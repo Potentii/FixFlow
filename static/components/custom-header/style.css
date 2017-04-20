@@ -20,9 +20,9 @@
 }
 
 /**
- * Logo and balance containers
+ * Logo and logoff containers
  */
-.custom-header > div > .custom-header-logo-container, .custom-header-balance-container{
+.custom-header > div > .custom-header-logo-container, .custom-header-logoff-container{
    flex-grow: 0;
    flex-shrink: 0;
    width: 20%;
@@ -37,6 +37,7 @@
    animation-duration: 0.2s;
    animation-timing-function: ease;
    transform-origin: left;
+   will-change: transform, opacity;
 }
 
 /**
@@ -103,14 +104,27 @@
    color: var(--icon-on-primary-color);
 }
 
-
-.custom-header-balance-container{
+/**
+ * Logoff container
+ */
+.custom-header-logoff-container{
    display: flex;
    flex-direction: row-reverse;
 }
+/**
+ * Logoff button
+ */
+.custom-header-logoff-container > button{
+   opacity: 0.8;
 
-.custom-header-balance-container > button{
    color: var(--text-on-primary-color);
    font-size: 0.9em;
+   font-weight: 700;
    text-transform: uppercase;
+
+   transition: opacity 0.2s ease;
+} .custom-header-logoff-container > button:hover{
+   opacity: 1;
+} .custom-header-logoff-container > button:active{
+   opacity: 0.7;
 }

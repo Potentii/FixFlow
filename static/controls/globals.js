@@ -8,13 +8,18 @@ const ENVS = Object.freeze({
    PROD: 'prod'
 });
 
+
+
 const LOCALE = 'pt-BR';
+
 
 
 const ACTORS = Object.freeze({
    CLIENT: 'client',
    OPERATOR: 'operator'
 });
+
+
 
 const TICKET_STATUS = Object.freeze({
    PENDING: 'PENDING',
@@ -37,7 +42,32 @@ const TICKET_STATUS = Object.freeze({
 });
 
 
+
+const TICKET_URGENCY = Object.freeze({
+   LOW: 'LOW',
+   MEDIUM: 'MEDIUM',
+   HIGH: 'HIGH',
+
+   /**
+    * Retrives the human readable version of a given urgency
+    * @param  {string} urgency The urgency to be converted
+    * @return {string}        The text
+    */
+   getText(urgency){
+      switch(urgency){
+         case this.LOW: return 'Low';
+         case this.MEDIUM: return 'Medium';
+         case this.HIGH: return 'High';
+      }
+      return '';
+   }
+});
+
+
+
 const pad1Right = v => v<10 ? v+'0' : v+'';
+
+
 
 function decimalHoursToFormat(decimal_hours, format){
    if(!format || typeof format!=='string')

@@ -12,26 +12,31 @@ pages.add('reports', '/reports', {
    },
 
    mounted(){
+      // *Loading the reports:
       this.load();
    },
 
    methods: {
 
       load(){
-
+         // *Retrieving the reports data:
          fetch('/api/v1/reports', {
                headers: new HeadersBuilder().addAccess().get()
             })
             .then(res => {
+               // *Checking the response status:
                switch(res.status){
                   case 200:
+                     // *If everything went fine:
+                     // *Parsing the response body:
                      return res.json()
-                        .then(reports => {
-
-                           this.reports = reports;
-                        });
-                     break;
+                        // *Updating the view:
+                        .then(reports => this.reports = reports);
                   default:
+                     // *If an error happened:
+                     // *Showing an error snack:
+                     snack.error('The server couldn\'t proccess your request', snack.LONG);
+                     // *Throwing an error:
                      throw new Error('server error');
                }
             })
