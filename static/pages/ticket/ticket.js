@@ -8,7 +8,6 @@ pages.add('ticket', '/ticket/:id', {
    data(){
       return {
          id: undefined,
-
          item: {},
          has_feedback: true
       };
@@ -28,7 +27,7 @@ pages.add('ticket', '/ticket/:id', {
          return cache.getActor().type;
       },
 
-      
+
 
       load(){
          // *Getting the ticket data:
@@ -127,36 +126,43 @@ pages.add('ticket', '/ticket/:id', {
             <div class="content">
 
                <label class="x-labeled-output">
-                  <span class="x-label">Title</span>
-                  <span>{{ item.title }}</span>
-               </label>
-
-               <label class="x-labeled-output">
                   <span class="x-label">Status</span>
-                  <span>{{ item.status }}</span>
+                  <span class="ticket-status-label -card" :data-status="item.status">{{ TICKET_STATUS.getText(item.status) }}</span>
                </label>
 
                <label class="x-labeled-output">
                   <span class="x-label">Urgency</span>
-                  <span>{{ item.urgency }}</span>
+                  <span class="ticket-urgency-label -card" :data-urgency="item.urgency">
+                     <i class="material-icons">whatshot</i>
+                     <span>{{ TICKET_URGENCY.getText(item.urgency) }}</span>
+                  </span>
+               </label>
+
+               <label class="x-labeled-output">
+                  <span class="x-label">Title</span>
+                  <span class="-card">{{ item.title }}</span>
                </label>
 
                <label class="x-labeled-output">
                   <span class="x-label">Description</span>
-                  <span>{{ item.description }}</span>
+                  <span class="ticket-description-label -card">{{ item.description }}</span>
                </label>
 
                <label class="x-labeled-output">
                   <span class="x-label">Opening date</span>
-                  <span>{{ new Date(item.date_opened).toLocaleDateString(LOCALE) }}</span>
-                  <span>{{ new Date(item.date_opened).toLocaleTimeString(LOCALE) }}</span>
+                  <span class="x-datetime-label -card">
+                     <span class="x-time">{{ new Date(item.date_opened).toLocaleTimeString(LOCALE) }}</span>
+                     <span class="x-date">{{ new Date(item.date_opened).toLocaleDateString(LOCALE) }}</span>
+                  </span>
                </label>
 
                <label class="x-labeled-output">
                   <span class="x-label">Closing date</span>
-                  <span v-if="item.date_closed">{{ new Date(item.date_closed).toLocaleDateString(LOCALE) }}</span>
-                  <span v-if="item.date_closed">{{ new Date(item.date_closed).toLocaleTimeString(LOCALE) }}</span>
-                  <span v-if="!item.date_closed">Not closed yet</span>
+                  <span class="x-datetime-label -card">
+                     <span class="x-time" v-if="item.date_closed">{{ new Date(item.date_closed).toLocaleTimeString(LOCALE) }}</span>
+                     <span class="x-date" v-if="item.date_closed">{{ new Date(item.date_closed).toLocaleDateString(LOCALE) }}</span>
+                     <span v-if="!item.date_closed">Not closed yet</span>
+                  </span>
                </label>
 
             </div>
